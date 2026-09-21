@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Cairo Font -->
+    <!-- Cairo -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap"
           rel="stylesheet">
 
@@ -42,7 +43,7 @@
 
         body {
             background-color: #003a1c;
-            color: #ffffff;
+            color: white;
             overflow-x: hidden;
 
             background-image:
@@ -55,30 +56,38 @@
 
         .glass-panel {
             background: rgba(0, 58, 28, 0.90);
+
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
 
             border: 1px solid rgba(212, 175, 55, 0.4);
 
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #006C35, #004f26);
+            background:
+                linear-gradient(
+                    135deg,
+                    #006C35,
+                    #004f26
+                );
 
             color: white;
 
-            padding: 0.4rem 0.8rem;
+            padding: 0.65rem 1rem;
 
             border-radius: 9999px;
 
-            font-weight: bold;
+            font-weight: 900;
 
             transition: all 0.3s;
 
             border: 2px solid #D4AF37;
 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .btn-primary:hover {
@@ -88,15 +97,24 @@
                 0 6px 20px rgba(212, 175, 55, 0.4);
 
             background:
-                linear-gradient(135deg, #007c3d, #005a2c);
+                linear-gradient(
+                    135deg,
+                    #007c3d,
+                    #005a2c
+                );
         }
 
         .btn-question {
-            background: linear-gradient(135deg, #D4AF37, #b89525);
+            background:
+                linear-gradient(
+                    135deg,
+                    #D4AF37,
+                    #b89525
+                );
 
             color: #003a1c;
 
-            padding: 0.5rem 0.8rem;
+            padding: 0.65rem 1rem;
 
             border-radius: 9999px;
 
@@ -117,31 +135,15 @@
                 0 6px 20px rgba(212, 175, 55, 0.5);
         }
 
-        .btn-secondary {
-            background: rgba(255,255,255,0.08);
-
-            color: white;
-
-            padding: 0.5rem 0.8rem;
-
-            border-radius: 9999px;
-
-            font-weight: bold;
-
-            transition: all 0.3s;
-
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.15);
-
-            transform: translateY(-2px);
-        }
-
         .drawing-animation {
             animation:
-                flipIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                flipIn 0.5s
+                cubic-bezier(
+                    0.175,
+                    0.885,
+                    0.32,
+                    1.275
+                );
         }
 
         @keyframes flipIn {
@@ -166,13 +168,19 @@
         }
 
         .win-modal {
-            background: rgba(0, 58, 28, 0.95);
+            background:
+                rgba(0, 58, 28, 0.95);
 
             border: 3px solid #D4AF37;
 
             animation:
                 popUp 0.4s
-                cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                cubic-bezier(
+                    0.175,
+                    0.885,
+                    0.32,
+                    1.275
+                );
         }
 
         @keyframes popUp {
@@ -194,38 +202,81 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
+            background: rgba(0,0,0,0.1);
         }
 
         ::-webkit-scrollbar-thumb {
-            background: rgba(212, 175, 55, 0.5);
+            background:
+                rgba(212,175,55,0.5);
+
             border-radius: 10px;
         }
 
+        /* ==============================
+           BINGO BOARD
+           ============================== */
+
+        .bingo-cell {
+            min-width: 0;
+            aspect-ratio: 1 / 1;
+
+            border-radius: 12px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            transition: all 0.2s;
+
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+
+            .bingo-cell {
+                border-radius: 15px;
+            }
+
+        }
+
     </style>
+
 </head>
 
 
-<body class="min-h-screen flex flex-col antialiased justify-between">
+<body class="min-h-screen flex flex-col antialiased">
 
 
 <!-- ========================================================= -->
 <!-- HEADER -->
 <!-- ========================================================= -->
 
-<header class="w-full px-6 py-2 flex items-center justify-between
-               border-b border-saudi-gold/20
-               bg-saudi-dark/80 backdrop-blur-md">
+<header
+    class="w-full px-5 md:px-8 py-2
+           flex items-center justify-between
+           border-b border-saudi-gold/20
+           bg-saudi-dark/90
+           backdrop-blur-md
+           shrink-0">
 
     <div class="flex items-center gap-2">
 
-        <span class="w-2.5 h-2.5 rounded-full
-                     bg-saudi-gold animate-pulse">
+        <span
+            class="w-2.5 h-2.5
+                   rounded-full
+                   bg-saudi-gold
+                   animate-pulse">
         </span>
 
-        <h1 class="text-sm md:text-base font-black
-                   tracking-wide text-white drop-shadow-md">
+        <h1
+            class="text-sm md:text-lg
+                   font-black
+                   tracking-wide
+                   text-white">
 
             لعبة بنقو اليوم الوطني 96
 
@@ -234,21 +285,28 @@
     </div>
 
 
-    <!-- Namaa Logo -->
+    <!-- LOGO -->
 
-    <div class="w-12 h-12 md:w-14 md:h-14
-                bg-white rounded-full p-0.5
-                shadow-[0_0_15px_rgba(212,175,55,0.4)]
-                border-2 border-saudi-gold
-                flex items-center justify-center
-                shrink-0 overflow-hidden">
+    <div
+        class="w-11 h-11
+               md:w-14 md:h-14
+               bg-white
+               rounded-full
+               p-0.5
+               shadow-[0_0_15px_rgba(212,175,55,0.4)]
+               border-2 border-saudi-gold
+               flex items-center
+               justify-center
+               overflow-hidden">
 
         <img
             src="./74C4E3DD-B884-454B-B50B-6663DD3B846E.png"
             alt="شعار نماء"
             id="store-logo-img"
-            class="w-full h-full object-contain
-                   rounded-full bg-white"
+            class="w-full h-full
+                   object-contain
+                   rounded-full
+                   bg-white"
         >
 
     </div>
@@ -261,23 +319,281 @@
 <!-- MAIN -->
 <!-- ========================================================= -->
 
-<main class="w-full max-w-[1700px] mx-auto
-             px-4 py-2
-             grid grid-cols-1 lg:grid-cols-12
-             gap-3 items-start my-auto">
+<main
+    class="w-full
+           max-w-[1700px]
+           mx-auto
+           px-3 md:px-6
+           py-3
+           flex flex-col
+           gap-3
+           flex-1">
+
+
+<!-- ========================================================= -->
+<!-- QUESTION - TOP -->
+<!-- ========================================================= -->
+
+<section
+    class="glass-panel
+           rounded-2xl
+           p-3 md:p-4
+           border-2 border-saudi-gold/40
+           shadow-2xl">
+
+
+    <div
+        class="relative
+               bg-black/25
+               rounded-xl
+               border border-white/10
+               p-3 md:p-4">
+
+
+        <!-- Label -->
+
+        <div
+            class="absolute
+                   -top-3
+                   right-4
+                   bg-saudi-gold
+                   text-saudi-dark
+                   px-3 py-1
+                   rounded-full
+                   text-[10px] md:text-xs
+                   font-black">
+
+            <i class="fa-solid fa-circle-question ml-1"></i>
+
+            السؤال الثقافي
+
+        </div>
+
+
+        <!-- Question -->
+
+        <p
+            id="question-text"
+            class="text-sm md:text-lg
+                   font-black
+                   text-gray-300
+                   text-center
+                   min-h-[40px]
+                   flex items-center
+                   justify-center
+                   leading-relaxed
+                   mt-1">
+
+            اضغط على "سحب سؤال"
+            لبدء المسابقة...
+
+        </p>
+
+    </div>
+
+
+    <!-- ANSWER -->
+
+    <div
+        class="relative
+               mt-3">
+
+
+        <div
+            class="absolute
+                   -top-2.5
+                   right-4
+                   bg-saudi-green
+                   text-white
+                   px-3 py-1
+                   rounded-full
+                   text-[10px]
+                   font-bold
+                   z-10
+                   border border-white/20">
+
+            <i class="fa-solid fa-check-double ml-1"></i>
+
+            الإجابة
+
+        </div>
+
+
+        <div
+            id="answer-box"
+            class="bg-white
+                   p-3
+                   rounded-xl
+                   border-2
+                   border-saudi-green
+                   shadow-md
+                   blur-sm
+                   opacity-50
+                   relative
+                   overflow-hidden">
+
+
+            <p
+                id="answer-text"
+                class="text-xs md:text-sm
+                       font-black
+                       text-saudi-dark
+                       text-center
+                       min-h-[22px]">
+
+                ...
+
+            </p>
+
+
+            <button
+                id="btn-reveal"
+                onclick="revealAnswer()"
+                disabled
+                class="absolute inset-0
+                       w-full h-full
+                       bg-saudi-light/90
+                       backdrop-blur-sm
+                       flex items-center
+                       justify-center
+                       font-bold
+                       text-saudi-green
+                       text-xs md:text-sm
+                       cursor-not-allowed">
+
+                <i class="fa-solid fa-eye ml-1"></i>
+
+                اضغط لإظهار الإجابة
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- CURRENT ELEMENT - CENTER -->
+<!-- ========================================================= -->
+
+<section
+    class="flex justify-center">
+
+
+    <div
+        class="glass-panel
+               rounded-2xl
+               p-3
+               md:p-4
+               flex flex-col
+               items-center
+               gap-2
+               w-36
+               md:w-44">
+
+
+        <span
+            class="text-[10px]
+                   text-saudi-gold
+                   font-black">
+
+            العنصر المسحوب
+
+        </span>
+
+
+        <div
+            id="current-card-display"
+            class="bg-white
+                   w-24 h-24
+                   md:w-32 md:h-32
+                   rounded-2xl
+                   flex flex-col
+                   items-center
+                   justify-center
+                   shadow-xl
+                   border-2
+                   border-saudi-gold
+                   text-center">
+
+
+            <div
+                class="w-9 h-9
+                       rounded-lg
+                       bg-saudi-light
+                       flex items-center
+                       justify-center
+                       mb-2">
+
+                <i
+                    id="card-icon"
+                    class="fa-solid
+                           fa-box-open
+                           text-lg
+                           text-gray-400">
+                </i>
+
+            </div>
+
+
+            <h3
+                id="card-name"
+                class="text-[11px] md:text-xs
+                       font-black
+                       text-gray-400
+                       px-1">
+
+                في انتظار السحب
+
+            </h3>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- BINGO BOARDS -->
+<!-- ========================================================= -->
+
+<section
+    class="grid
+           grid-cols-1
+           lg:grid-cols-2
+           gap-3 md:gap-5
+           w-full
+           flex-1">
 
 
 <!-- ========================================================= -->
 <!-- TEAM 1 -->
 <!-- ========================================================= -->
 
-<section class="lg:col-span-3
-                glass-panel p-2.5 rounded-2xl
-                flex flex-col shadow-2xl">
+<div
+    class="glass-panel
+           rounded-2xl
+           p-3 md:p-4
+           shadow-2xl
+           flex flex-col">
 
-    <div class="flex items-center justify-between
-                mb-1.5 pb-1
-                border-b border-saudi-gold/20">
+
+    <!-- TEAM HEADER -->
+
+    <div
+        class="flex items-center
+               justify-between
+               gap-2
+               mb-2
+               pb-2
+               border-b
+               border-saudi-gold/20">
+
 
         <input
             type="text"
@@ -286,19 +602,27 @@
             onchange="updateTeamName(1)"
             class="bg-transparent
                    text-saudi-gold
-                   font-black text-xs md:text-sm
-                   border-b border-dashed
+                   font-black
+                   text-sm md:text-lg
+                   border-b
+                   border-dashed
                    border-saudi-gold/50
                    focus:outline-none
-                   w-28 px-1"
+                   w-40 md:w-52
+                   px-1"
         >
+
 
         <span
             id="team1-score"
-            class="bg-saudi-green text-white
-                   px-2 py-0.5 rounded-full
-                   text-[11px] font-bold
-                   border border-saudi-gold/30">
+            class="bg-saudi-green
+                   text-white
+                   px-3 py-1
+                   rounded-full
+                   text-xs md:text-sm
+                   font-bold
+                   border border-saudi-gold/30
+                   shrink-0">
 
             1 / 25
 
@@ -307,393 +631,30 @@
     </div>
 
 
-    <p class="text-[9px] text-gray-300
-              mb-1.5 text-center">
+    <p
+        class="text-[9px] md:text-xs
+               text-gray-300
+               mb-2
+               text-center">
 
-        اضغط على المربع لتظليله
-        وأكمل خطًا للفوز!
+        اضغط على المربع عند سحب العنصر
 
     </p>
 
 
+    <!-- BOARD -->
+
     <div
         id="team1-grid"
-        class="grid grid-cols-5 gap-1">
-
-    </div>
-
-</section>
-
-
-
-<!-- ========================================================= -->
-<!-- CENTER -->
-<!-- ========================================================= -->
-
-<section class="lg:col-span-6
-                flex flex-col gap-2.5">
-
-
-<!-- ========================================================= -->
-<!-- DRAW AREA -->
-<!-- ========================================================= -->
-
-<div class="glass-panel p-3 rounded-2xl
-            shadow-2xl
-            flex flex-col gap-3
-            border-2 border-saudi-gold/40">
-
-
-    <!-- ===================================================== -->
-    <!-- CURRENT ELEMENT -->
-    <!-- ===================================================== -->
-
-    <div class="flex flex-col
-                sm:flex-row
-                gap-3
-                items-center">
-
-
-        <!-- ELEMENT CARD -->
-
-        <div class="w-28 h-28 md:w-32 md:h-32
-                    shrink-0 relative">
-
-            <div
-                id="current-card-display"
-                class="bg-white p-2
-                       rounded-xl
-                       w-full h-full
-                       flex flex-col
-                       items-center
-                       justify-center
-                       shadow-xl
-                       border-3 border-saudi-gold
-                       text-center
-                       relative overflow-hidden">
-
-
-                <div
-                    class="w-8 h-8 rounded-lg
-                           bg-saudi-light
-                           flex items-center justify-center
-                           mb-1 shadow-inner">
-
-                    <i
-                        id="card-icon"
-                        class="fa-solid
-                               fa-box-open
-                               text-lg
-                               text-gray-400">
-                    </i>
-
-                </div>
-
-
-                <h3
-                    id="card-name"
-                    class="text-[12px]
-                           font-black
-                           text-gray-400
-                           truncate w-full">
-
-                    في انتظار العنصر
-
-                </h3>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ================================================= -->
-        <!-- QUESTION -->
-        <!-- ================================================= -->
-
-        <div class="flex-1 flex flex-col
-                    justify-between
-                    w-full gap-2">
-
-
-            <div
-                class="bg-black/30
-                       p-3 rounded-xl
-                       border border-white/10
-                       relative">
-
-                <div
-                    class="absolute -top-2.5 right-3
-                           bg-saudi-gold
-                           text-saudi-dark
-                           px-2 py-0.5
-                           rounded-full
-                           text-[10px]
-                           font-bold">
-
-                    <i class="fa-solid
-                              fa-circle-question mr-1">
-                    </i>
-
-                    السؤال الثقافي
-
-                </div>
-
-
-                <p
-                    id="question-text"
-                    class="text-xs md:text-sm
-                           font-bold
-                           text-gray-300
-                           mt-1
-                           min-h-[45px]
-                           flex items-center">
-
-                    اضغط على "سحب سؤال"
-                    لبدء الأسئلة...
-
-                </p>
-
-            </div>
-
-
-
-            <!-- ================================================= -->
-            <!-- ANSWER -->
-            <!-- ================================================= -->
-
-            <div class="relative">
-
-                <div
-                    class="absolute -top-2.5 right-3
-                           bg-saudi-green
-                           text-white
-                           px-2 py-0.5
-                           rounded-full
-                           text-[10px]
-                           font-bold z-10
-                           border border-white/20">
-
-                    <i class="fa-solid
-                              fa-check-double mr-1">
-                    </i>
-
-                    الإجابة الصحيحة
-
-                </div>
-
-
-                <div
-                    id="answer-box"
-                    class="bg-white
-                           p-2 rounded-xl
-                           border-2 border-saudi-green
-                           shadow-md
-                           transition-all duration-300
-                           blur-sm opacity-50
-                           relative overflow-hidden">
-
-
-                    <p
-                        id="answer-text"
-                        class="text-xs
-                               font-black
-                               text-saudi-dark
-                               mt-1
-                               min-h-[25px]">
-
-                        ...
-
-                    </p>
-
-
-                    <button
-                        id="btn-reveal"
-                        onclick="revealAnswer()"
-                        disabled
-                        class="absolute inset-0
-                               w-full h-full
-                               bg-saudi-light/90
-                               backdrop-blur-sm
-                               flex items-center
-                               justify-center
-                               font-bold
-                               text-saudi-green
-                               text-xs
-                               hover:bg-saudi-light
-                               transition
-                               cursor-not-allowed">
-
-                        <i class="fa-solid fa-eye ml-1"></i>
-
-                        اضغط لإظهار الإجابة
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- ===================================================== -->
-    <!-- SEPARATE BUTTONS -->
-    <!-- ===================================================== -->
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-
-
-        <!-- DRAW ELEMENT -->
-
-        <button
-            id="btn-draw-element"
-            onclick="drawNextElement()"
-            class="btn-primary
-                   text-xs md:text-sm
-                   py-2
-                   w-full
-                   flex items-center
-                   justify-center
-                   gap-2
-                   shadow-xl">
-
-            <i class="fa-solid fa-dice"></i>
-
-            سحب عنصر
-
-        </button>
-
-
-
-        <!-- DRAW QUESTION -->
-
-        <button
-            id="btn-draw-question"
-            onclick="drawNextQuestion()"
-            class="btn-question
-                   text-xs md:text-sm
-                   py-2
-                   w-full
-                   flex items-center
-                   justify-center
-                   gap-2
-                   shadow-xl">
-
-            <i class="fa-solid fa-circle-question"></i>
-
-            سحب سؤال
-
-        </button>
-
-    </div>
-
-
-</div>
-
-
-
-<!-- ========================================================= -->
-<!-- ELEMENT HISTORY -->
-<!-- ========================================================= -->
-
-<div
-    class="glass-panel p-2 rounded-2xl
-           flex flex-col
-           max-h-[80px]">
-
-
-    <h3
-        class="text-[11px]
-               font-black text-white
-               mb-1
-               flex items-center gap-1">
-
-        <i class="fa-solid
-                  fa-clock-rotate-left
-                  text-saudi-gold">
-        </i>
-
-        العناصر المسحوبة
-
-    </h3>
-
-
-    <div
-        id="element-history"
-        class="overflow-y-auto
-               flex-1 pr-1
-               flex flex-wrap gap-1">
-
-        <p
-            class="text-[9px]
-                   text-gray-400
-                   text-center
-                   py-0.5
-                   w-full">
-
-            لم يتم سحب أي عنصر بعد
-
-        </p>
+        class="grid
+               grid-cols-5
+               gap-1.5 md:gap-2
+               w-full
+               flex-1">
 
     </div>
 
 </div>
-
-
-
-<!-- ========================================================= -->
-<!-- QUESTION HISTORY -->
-<!-- ========================================================= -->
-
-<div
-    class="glass-panel p-2 rounded-2xl
-           flex flex-col
-           max-h-[80px]">
-
-
-    <h3
-        class="text-[11px]
-               font-black text-white
-               mb-1
-               flex items-center gap-1">
-
-        <i class="fa-solid
-                  fa-question
-                  text-saudi-gold">
-        </i>
-
-        الأسئلة المسحوبة
-
-    </h3>
-
-
-    <div
-        id="question-history"
-        class="overflow-y-auto
-               flex-1 pr-1
-               flex flex-wrap gap-1">
-
-        <p
-            class="text-[9px]
-                   text-gray-400
-                   text-center
-                   py-0.5
-                   w-full">
-
-            لم يتم سحب أي سؤال بعد
-
-        </p>
-
-    </div>
-
-</div>
-
-
-</section>
 
 
 
@@ -701,18 +662,22 @@
 <!-- TEAM 2 -->
 <!-- ========================================================= -->
 
-<section
-    class="lg:col-span-3
-           glass-panel p-2.5
+<div
+    class="glass-panel
            rounded-2xl
-           flex flex-col
-           shadow-2xl">
+           p-3 md:p-4
+           shadow-2xl
+           flex flex-col">
 
+
+    <!-- TEAM HEADER -->
 
     <div
         class="flex items-center
                justify-between
-               mb-1.5 pb-1
+               gap-2
+               mb-2
+               pb-2
                border-b
                border-saudi-gold/20">
 
@@ -725,12 +690,13 @@
             class="bg-transparent
                    text-saudi-gold
                    font-black
-                   text-xs md:text-sm
+                   text-sm md:text-lg
                    border-b
                    border-dashed
                    border-saudi-gold/50
                    focus:outline-none
-                   w-28 px-1"
+                   w-40 md:w-52
+                   px-1"
         >
 
 
@@ -738,12 +704,12 @@
             id="team2-score"
             class="bg-saudi-green
                    text-white
-                   px-2 py-0.5
+                   px-3 py-1
                    rounded-full
-                   text-[11px]
+                   text-xs md:text-sm
                    font-bold
-                   border
-                   border-saudi-gold/30">
+                   border border-saudi-gold/30
+                   shrink-0">
 
             1 / 25
 
@@ -753,20 +719,196 @@
 
 
     <p
-        class="text-[9px]
+        class="text-[9px] md:text-xs
                text-gray-300
-               mb-1.5
+               mb-2
                text-center">
 
-        اضغط على المربع لتظليله
-        وأكمل خطًا للفوز!
+        اضغط على المربع عند سحب العنصر
 
     </p>
 
 
+    <!-- BOARD -->
+
     <div
         id="team2-grid"
-        class="grid grid-cols-5 gap-1">
+        class="grid
+               grid-cols-5
+               gap-1.5 md:gap-2
+               w-full
+               flex-1">
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- ========================================================= -->
+<!-- BUTTONS - BOTTOM -->
+<!-- ========================================================= -->
+
+<section
+    class="glass-panel
+           rounded-2xl
+           p-3
+           md:p-4
+           shadow-2xl">
+
+
+    <div
+        class="grid
+               grid-cols-1
+               md:grid-cols-2
+               gap-2
+               max-w-3xl
+               mx-auto">
+
+
+        <!-- DRAW ELEMENT -->
+
+        <button
+            id="btn-draw-element"
+            onclick="drawNextElement()"
+            class="btn-primary
+                   w-full
+                   flex items-center
+                   justify-center
+                   gap-2
+                   text-sm md:text-base">
+
+            <i class="fa-solid fa-dice"></i>
+
+            سحب عنصر
+
+        </button>
+
+
+        <!-- DRAW QUESTION -->
+
+        <button
+            id="btn-draw-question"
+            onclick="drawNextQuestion()"
+            class="btn-question
+                   w-full
+                   flex items-center
+                   justify-center
+                   gap-2
+                   text-sm md:text-base">
+
+            <i class="fa-solid fa-circle-question"></i>
+
+            سحب سؤال
+
+        </button>
+
+    </div>
+
+
+    <!-- HISTORIES -->
+
+    <div
+        class="grid
+               grid-cols-1
+               md:grid-cols-2
+               gap-2
+               mt-2
+               max-w-5xl
+               mx-auto">
+
+
+        <!-- ELEMENT HISTORY -->
+
+        <div
+            class="bg-black/20
+                   rounded-xl
+                   p-2
+                   border border-white/10">
+
+
+            <h3
+                class="text-[10px]
+                       font-black
+                       text-white
+                       mb-1">
+
+                <i class="fa-solid
+                          fa-clock-rotate-left
+                          text-saudi-gold ml-1">
+                </i>
+
+                العناصر المسحوبة
+
+            </h3>
+
+
+            <div
+                id="element-history"
+                class="flex flex-wrap
+                       gap-1
+                       max-h-14
+                       overflow-y-auto">
+
+                <span
+                    class="text-[9px]
+                           text-gray-400">
+
+                    لم يتم سحب أي عنصر
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- QUESTION HISTORY -->
+
+        <div
+            class="bg-black/20
+                   rounded-xl
+                   p-2
+                   border border-white/10">
+
+
+            <h3
+                class="text-[10px]
+                       font-black
+                       text-white
+                       mb-1">
+
+                <i class="fa-solid
+                          fa-circle-question
+                          text-saudi-gold ml-1">
+                </i>
+
+                الأسئلة المسحوبة
+
+            </h3>
+
+
+            <div
+                id="question-history"
+                class="flex flex-wrap
+                       gap-1
+                       max-h-14
+                       overflow-y-auto">
+
+                <span
+                    class="text-[9px]
+                           text-gray-400">
+
+                    لم يتم سحب أي سؤال
+
+                </span>
+
+            </div>
+
+        </div>
 
     </div>
 
@@ -782,12 +924,14 @@
 <!-- ========================================================= -->
 
 <footer
-    class="w-full text-center
+    class="w-full
+           text-center
            py-1.5
-           text-[10px]
+           text-[9px] md:text-[10px]
            text-gray-400
            border-t
-           border-saudi-gold/10">
+           border-saudi-gold/10
+           shrink-0">
 
     Saudi National Day 96 Bingo By Namaa
     - جميع الحقوق محفوظة
@@ -859,7 +1003,7 @@
                    text-gray-200
                    font-bold">
 
-            استطاع الفريق تحقيق خط مستقيم بنجاح
+            استطاع الفريق إكمال خط مستقيم بنجاح
             ودام عزك يا وطن!
 
         </p>
@@ -870,8 +1014,7 @@
             class="btn-primary
                    text-base
                    py-2.5
-                   px-8
-                   mt-2">
+                   px-8">
 
             استمرار اللعب
 
@@ -896,72 +1039,173 @@
 
 const RAW_BINGO_ELEMENTS = [
 
-    { id: 'b1', name: 'العلا', icon: 'fa-mountain-sun' },
+    {
+        id: 'b1',
+        name: 'العلا',
+        icon: 'fa-mountain-sun'
+    },
 
-    { id: 'b2', name: 'الخيل', icon: 'fa-horse-head' },
+    {
+        id: 'b2',
+        name: 'الخيل',
+        icon: 'fa-horse-head'
+    },
 
-    { id: 'b3', name: 'السيف', icon: 'fa-khanda' },
+    {
+        id: 'b3',
+        name: 'السيف',
+        icon: 'fa-khanda'
+    },
 
-    { id: 'b4', name: 'النخلة', icon: 'fa-tree' },
+    {
+        id: 'b4',
+        name: 'النخلة',
+        icon: 'fa-tree'
+    },
 
-    { id: 'b5', name: 'الرياض', icon: 'fa-city' },
+    {
+        id: 'b5',
+        name: 'الرياض',
+        icon: 'fa-city'
+    },
 
-    { id: 'b6', name: 'العلم', icon: 'fa-flag' },
+    {
+        id: 'b6',
+        name: 'العلم',
+        icon: 'fa-flag'
+    },
 
-    { id: 'b7', name: 'القهوة', icon: 'fa-mug-hot' },
+    {
+        id: 'b7',
+        name: 'القهوة',
+        icon: 'fa-mug-hot'
+    },
 
-    { id: 'b8', name: 'التراث', icon: 'fa-landmark' },
+    {
+        id: 'b8',
+        name: 'التراث',
+        icon: 'fa-landmark'
+    },
 
-    { id: 'b9', name: 'الخيمة', icon: 'fa-campground' },
+    {
+        id: 'b9',
+        name: 'الخيمة',
+        icon: 'fa-campground'
+    },
 
-    { id: 'b10', name: 'الصقر', icon: 'fa-feather-pointed' },
+    {
+        id: 'b10',
+        name: 'الصقر',
+        icon: 'fa-feather-pointed'
+    },
 
-    { id: 'b11', name: 'الدلة', icon: 'fa-fire-burner' },
+    {
+        id: 'b11',
+        name: 'الدلة',
+        icon: 'fa-fire-burner'
+    },
 
-    { id: 'b12', name: 'الفنجال', icon: 'fa-mug-saucer' },
+    {
+        id: 'b12',
+        name: 'الفنجال',
+        icon: 'fa-mug-saucer'
+    },
 
-    { id: 'b13', name: 'الأخضر', icon: 'fa-palette' },
+    {
+        id: 'b13',
+        name: 'الأخضر',
+        icon: 'fa-palette'
+    },
 
-    { id: 'b14', name: 'الصحراء', icon: 'fa-sun' },
+    {
+        id: 'b14',
+        name: 'الصحراء',
+        icon: 'fa-sun'
+    },
 
-    { id: 'b15', name: 'المصمك', icon: 'fa-chess-rook' },
+    {
+        id: 'b15',
+        name: 'المصمك',
+        icon: 'fa-chess-rook'
+    },
 
-    { id: 'b16', name: 'التمر', icon: 'fa-bowl-food' },
+    {
+        id: 'b16',
+        name: 'التمر',
+        icon: 'fa-bowl-food'
+    },
 
-    { id: 'b17', name: 'اليوم الوطني', icon: 'fa-calendar-day' },
+    {
+        id: 'b17',
+        name: 'اليوم الوطني',
+        icon: 'fa-calendar-day'
+    },
 
-    { id: 'b18', name: 'جدة', icon: 'fa-water' },
+    {
+        id: 'b18',
+        name: 'جدة',
+        icon: 'fa-water'
+    },
 
-    { id: 'b19', name: 'المسجد', icon: 'fa-mosque' },
+    {
+        id: 'b19',
+        name: 'المسجد',
+        icon: 'fa-mosque'
+    },
 
-    { id: 'b20', name: 'الكثبان', icon: 'fa-wind' },
+    {
+        id: 'b20',
+        name: 'الكثبان',
+        icon: 'fa-wind'
+    },
 
-    { id: 'b21', name: 'الفخار', icon: 'fa-jar' },
+    {
+        id: 'b21',
+        name: 'الفخار',
+        icon: 'fa-jar'
+    },
 
-    { id: 'b22', name: 'السدو', icon: 'fa-rug' },
+    {
+        id: 'b22',
+        name: 'السدو',
+        icon: 'fa-rug'
+    },
 
-    { id: 'b23', name: 'العرضة', icon: 'fa-people-group' },
+    {
+        id: 'b23',
+        name: 'العرضة',
+        icon: 'fa-people-group'
+    },
 
-    { id: 'b24', name: 'الجمل', icon: 'fa-paw' }
+    {
+        id: 'b24',
+        name: 'الجمل',
+        icon: 'fa-paw'
+    }
 
 ];
 
 
 
 /* ============================================================
-   CREATE 5x5 BOARD
+   FULL BOARD
    ============================================================ */
 
 function getFullBoardElements() {
 
-    const list = [...RAW_BINGO_ELEMENTS];
+    const list =
+        [...RAW_BINGO_ELEMENTS];
 
-    list.splice(12, 0, {
-        id: 'free',
-        name: 'FREE',
-        icon: 'fa-star',
-        isFree: true
-    });
+    list.splice(
+        12,
+        0,
+        {
+            id: 'free',
+            name: 'FREE',
+            icon: 'fa-star',
+            isFree: true
+        }
+    );
 
     return list;
 }
@@ -969,12 +1213,10 @@ function getFullBoardElements() {
 
 
 /* ============================================================
-   50 QUESTIONS
+   QUESTIONS - 50
    ============================================================ */
 
 const QUESTIONS_BANK = [
-
-    /* ---------------- HISTORICAL ---------------- */
 
     {
         id: 1,
@@ -1036,9 +1278,6 @@ const QUESTIONS_BANK = [
         a: "الأمير سعود بن عبدالعزيز آل سعود."
     },
 
-
-    /* ---------------- SAUDI ARABIA ---------------- */
-
     {
         id: 11,
         q: "ما عاصمة المملكة العربية السعودية؟",
@@ -1098,9 +1337,6 @@ const QUESTIONS_BANK = [
         q: "ما اسم المشروع السياحي الشهير في شمال غرب السعودية؟",
         a: "مشروع نيوم."
     },
-
-
-    /* ---------------- VISION 2030 ---------------- */
 
     {
         id: 21,
@@ -1162,9 +1398,6 @@ const QUESTIONS_BANK = [
         a: "برنامج التحول الوطني، وهو أحد برامج تحقيق رؤية 2030."
     },
 
-
-    /* ---------------- TRUE / FALSE ---------------- */
-
     {
         id: 31,
         q: "اليوم الوطني السعودي يصادف 23 سبتمبر.",
@@ -1224,9 +1457,6 @@ const QUESTIONS_BANK = [
         q: "مشروع نيوم يقع في جنوب السعودية.",
         a: "خطأ، يقع في شمال غرب السعودية."
     },
-
-
-    /* ---------------- DISCUSSION ---------------- */
 
     {
         id: 41,
@@ -1302,43 +1532,32 @@ const gameState = {
 
     team2Name: 'فريق المجد',
 
-    /* العناصر المسحوبة */
-
     drawnElements: [],
-
-    /* الأسئلة المسحوبة */
 
     drawnQuestions: [],
 
-    /* العنصر الحالي */
-
     currentElement: null,
-
-    /* السؤال الحالي */
 
     currentQuestion: null,
 
-    /* مربعات الفريق الأول */
-
     team1Checked: {
-        'free': true
+        free: true
     },
 
-    /* مربعات الفريق الثاني */
-
     team2Checked: {
-        'free': true
+        free: true
     },
 
     hasTeam1Won: false,
 
     hasTeam2Won: false
+
 };
 
 
 
 /* ============================================================
-   UPDATE TEAM NAME
+   TEAM NAME
    ============================================================ */
 
 function updateTeamName(teamNum) {
@@ -1346,12 +1565,16 @@ function updateTeamName(teamNum) {
     if (teamNum === 1) {
 
         gameState.team1Name =
-            document.getElementById('team1-name-input').value;
+            document.getElementById(
+                'team1-name-input'
+            ).value;
 
     } else {
 
         gameState.team2Name =
-            document.getElementById('team2-name-input').value;
+            document.getElementById(
+                'team2-name-input'
+            ).value;
 
     }
 
@@ -1366,10 +1589,14 @@ function updateTeamName(teamNum) {
 function renderTeamBoards() {
 
     const grid1 =
-        document.getElementById('team1-grid');
+        document.getElementById(
+            'team1-grid'
+        );
 
     const grid2 =
-        document.getElementById('team2-grid');
+        document.getElementById(
+            'team2-grid'
+        );
 
 
     grid1.innerHTML = '';
@@ -1377,211 +1604,160 @@ function renderTeamBoards() {
     grid2.innerHTML = '';
 
 
-    const boardElements =
+    const board =
         getFullBoardElements();
 
 
-    boardElements.forEach(el => {
+    board.forEach(el => {
 
 
-        /* ====================================================
-           TEAM 1
-           ==================================================== */
+        /* TEAM 1 */
 
-        const isChecked1 =
-            gameState.team1Checked[el.id];
+        const checked1 =
+            !!gameState.team1Checked[el.id];
 
 
-        const item1 =
+        const cell1 =
             document.createElement('div');
 
 
-        if (el.isFree) {
-
-            item1.className =
-                `p-1 rounded-lg text-center
-                 flex flex-col
-                 items-center justify-center
-                 aspect-square
-                 border
-                 bg-white/40
-                 text-saudi-gold
-                 border-saudi-gold
-                 font-black
-                 shadow-md`;
-
-
-            item1.innerHTML = `
-
-                <i class="fa-solid ${el.icon}
-                          text-xs mb-0.5
-                          text-saudi-gold">
-                </i>
-
-                <span class="text-[8px]
-                             leading-tight
-                             text-saudi-gold
-                             font-black">
-
-                    FREE
-
-                </span>
-            `;
-
-        } else {
-
-            item1.className =
-                `p-1 rounded-lg
-                 text-center
-                 cursor-pointer
-                 transition
-                 flex flex-col
-                 items-center justify-center
-                 aspect-square
-                 border
-                 ${
-                    isChecked1
-                    ?
-                    'bg-white/35 text-white border-white shadow-lg backdrop-blur-sm font-bold scale-[0.98]'
-                    :
-                    'bg-black/25 text-gray-300 border-white/10 hover:bg-black/40'
-                 }`;
+        cell1.className =
+            `bingo-cell border
+             ${
+                el.isFree
+                ?
+                'bg-white/35 border-saudi-gold text-saudi-gold shadow-md'
+                :
+                checked1
+                ?
+                'bg-white/35 border-white text-white shadow-lg backdrop-blur-sm scale-[0.98]'
+                :
+                'bg-black/25 border-white/10 text-gray-300 hover:bg-black/40 cursor-pointer'
+             }`;
 
 
-            item1.onclick =
-                () => toggleTeamCell(1, el.id);
+        if (!el.isFree) {
 
+            cell1.onclick =
+                () =>
+                    toggleTeamCell(
+                        1,
+                        el.id
+                    );
 
-            item1.innerHTML = `
-
-                <i class="fa-solid ${el.icon}
-                          text-xs mb-0.5
-                          ${
-                            isChecked1
-                            ? 'text-white'
-                            : 'text-saudi-gold'
-                          }">
-                </i>
-
-                <span class="text-[8px]
-                             leading-tight
-                             truncate
-                             w-full">
-
-                    ${el.name}
-
-                </span>
-            `;
         }
 
 
-        grid1.appendChild(item1);
+        cell1.innerHTML = `
+
+            <i
+                class="fa-solid
+                       ${el.icon}
+                       text-base
+                       md:text-xl
+                       mb-1
+                       ${
+                           checked1 || el.isFree
+                           ?
+                           'text-white'
+                           :
+                           'text-saudi-gold'
+                       }">
+            </i>
+
+            <span
+                class="text-[9px]
+                       md:text-xs
+                       font-bold
+                       leading-tight
+                       px-0.5">
+
+                ${el.name}
+
+            </span>
+
+        `;
+
+
+        grid1.appendChild(cell1);
 
 
 
-        /* ====================================================
-           TEAM 2
-           ==================================================== */
+        /* TEAM 2 */
 
-        const isChecked2 =
-            gameState.team2Checked[el.id];
+        const checked2 =
+            !!gameState.team2Checked[el.id];
 
 
-        const item2 =
+        const cell2 =
             document.createElement('div');
 
 
-        if (el.isFree) {
-
-            item2.className =
-                `p-1 rounded-lg
-                 text-center
-                 flex flex-col
-                 items-center justify-center
-                 aspect-square
-                 border
-                 bg-white/40
-                 text-saudi-gold
-                 border-saudi-gold
-                 font-black
-                 shadow-md`;
-
-
-            item2.innerHTML = `
-
-                <i class="fa-solid ${el.icon}
-                          text-xs mb-0.5
-                          text-saudi-gold">
-                </i>
-
-                <span class="text-[8px]
-                             leading-tight
-                             text-saudi-gold
-                             font-black">
-
-                    FREE
-
-                </span>
-
-            `;
-
-        } else {
-
-            item2.className =
-                `p-1 rounded-lg
-                 text-center
-                 cursor-pointer
-                 transition
-                 flex flex-col
-                 items-center justify-center
-                 aspect-square
-                 border
-                 ${
-                    isChecked2
-                    ?
-                    'bg-white/35 text-white border-white shadow-lg backdrop-blur-sm font-bold scale-[0.98]'
-                    :
-                    'bg-black/25 text-gray-300 border-white/10 hover:bg-black/40'
-                 }`;
+        cell2.className =
+            `bingo-cell border
+             ${
+                el.isFree
+                ?
+                'bg-white/35 border-saudi-gold text-saudi-gold shadow-md'
+                :
+                checked2
+                ?
+                'bg-white/35 border-white text-white shadow-lg backdrop-blur-sm scale-[0.98]'
+                :
+                'bg-black/25 border-white/10 text-gray-300 hover:bg-black/40 cursor-pointer'
+             }`;
 
 
-            item2.onclick =
-                () => toggleTeamCell(2, el.id);
+        if (!el.isFree) {
 
+            cell2.onclick =
+                () =>
+                    toggleTeamCell(
+                        2,
+                        el.id
+                    );
 
-            item2.innerHTML = `
-
-                <i class="fa-solid ${el.icon}
-                          text-xs mb-0.5
-                          ${
-                            isChecked2
-                            ? 'text-white'
-                            : 'text-saudi-gold'
-                          }">
-                </i>
-
-                <span class="text-[8px]
-                             leading-tight
-                             truncate
-                             w-full">
-
-                    ${el.name}
-
-                </span>
-
-            `;
         }
 
 
-        grid2.appendChild(item2);
+        cell2.innerHTML = `
+
+            <i
+                class="fa-solid
+                       ${el.icon}
+                       text-base
+                       md:text-xl
+                       mb-1
+                       ${
+                           checked2 || el.isFree
+                           ?
+                           'text-white'
+                           :
+                           'text-saudi-gold'
+                       }">
+            </i>
+
+            <span
+                class="text-[9px]
+                       md:text-xs
+                       font-bold
+                       leading-tight
+                       px-0.5">
+
+                ${el.name}
+
+            </span>
+
+        `;
+
+
+        grid2.appendChild(cell2);
 
     });
 
 
 
-    /* ========================================================
-       SCORES
-       ======================================================== */
+    /* SCORE */
 
     const score1 =
         Object.values(
@@ -1595,11 +1771,15 @@ function renderTeamBoards() {
         ).filter(Boolean).length;
 
 
-    document.getElementById('team1-score').innerText =
+    document.getElementById(
+        'team1-score'
+    ).innerText =
         `${score1} / 25`;
 
 
-    document.getElementById('team2-score').innerText =
+    document.getElementById(
+        'team2-score'
+    ).innerText =
         `${score2} / 25`;
 
 
@@ -1610,10 +1790,13 @@ function renderTeamBoards() {
 
 
 /* ============================================================
-   TOGGLE TEAM CELL
+   TOGGLE CELL
    ============================================================ */
 
-function toggleTeamCell(teamNum, elementId) {
+function toggleTeamCell(
+    teamNum,
+    elementId
+) {
 
     if (elementId === 'free') {
         return;
@@ -1640,7 +1823,7 @@ function toggleTeamCell(teamNum, elementId) {
 
 
 /* ============================================================
-   CHECK WIN
+   WIN CHECK
    ============================================================ */
 
 function checkWinConditions() {
@@ -1667,21 +1850,18 @@ function checkWinConditions() {
                 board[r * 5 + c];
 
 
-            const isChecked1 =
+            row1.push(
                 el.isFree
                 ? true
-                : !!gameState.team1Checked[el.id];
+                : !!gameState.team1Checked[el.id]
+            );
 
 
-            const isChecked2 =
+            row2.push(
                 el.isFree
                 ? true
-                : !!gameState.team2Checked[el.id];
-
-
-            row1.push(isChecked1);
-
-            row2.push(isChecked2);
+                : !!gameState.team2Checked[el.id]
+            );
 
         }
 
@@ -1691,7 +1871,6 @@ function checkWinConditions() {
         matrix2.push(row2);
 
     }
-
 
 
     if (
@@ -1726,17 +1905,21 @@ function checkWinConditions() {
 
 
 /* ============================================================
-   CHECK ROWS / COLUMNS / DIAGONALS
+   LINE CHECK
    ============================================================ */
 
 function hasCompletedLine(matrix) {
 
 
-    /* Rows */
+    /* ROWS */
 
     for (let r = 0; r < 5; r++) {
 
-        if (matrix[r].every(val => val)) {
+        if (
+            matrix[r].every(
+                value => value
+            )
+        ) {
 
             return true;
 
@@ -1745,18 +1928,18 @@ function hasCompletedLine(matrix) {
     }
 
 
-    /* Columns */
+    /* COLUMNS */
 
     for (let c = 0; c < 5; c++) {
 
-        let colWin = true;
+        let win = true;
 
 
         for (let r = 0; r < 5; r++) {
 
             if (!matrix[r][c]) {
 
-                colWin = false;
+                win = false;
 
                 break;
 
@@ -1765,25 +1948,23 @@ function hasCompletedLine(matrix) {
         }
 
 
-        if (colWin) {
-
+        if (win) {
             return true;
-
         }
 
     }
 
 
-    /* Diagonal */
+    /* DIAGONAL */
 
-    let diag1Win = true;
+    let diagonal1 = true;
 
 
     for (let i = 0; i < 5; i++) {
 
         if (!matrix[i][i]) {
 
-            diag1Win = false;
+            diagonal1 = false;
 
             break;
 
@@ -1792,24 +1973,21 @@ function hasCompletedLine(matrix) {
     }
 
 
-    if (diag1Win) {
-
+    if (diagonal1) {
         return true;
-
     }
 
 
+    /* REVERSE DIAGONAL */
 
-    /* Reverse diagonal */
-
-    let diag2Win = true;
+    let diagonal2 = true;
 
 
     for (let i = 0; i < 5; i++) {
 
         if (!matrix[i][4 - i]) {
 
-            diag2Win = false;
+            diagonal2 = false;
 
             break;
 
@@ -1818,10 +1996,8 @@ function hasCompletedLine(matrix) {
     }
 
 
-    if (diag2Win) {
-
+    if (diagonal2) {
         return true;
-
     }
 
 
@@ -1837,62 +2013,68 @@ function hasCompletedLine(matrix) {
 
 function showWinModal(teamName) {
 
-    document.getElementById('win-title').innerText =
+    document.getElementById(
+        'win-title'
+    ).innerText =
         `مبروك الفوز لـ ${teamName}!`;
 
 
-    document.getElementById('win-message').innerText =
-        `استطاع الفريق إكمال خط مستقيم بنجاح ودام عزك يا وطن!`;
+    document.getElementById(
+        'win-message'
+    ).innerText =
+        'استطاع الفريق إكمال خط مستقيم بنجاح ودام عزك يا وطن!';
 
 
-    document
-        .getElementById('win-modal')
-        .classList
-        .remove('hidden');
+    document.getElementById(
+        'win-modal'
+    ).classList.remove('hidden');
 
 }
 
 
-
 function closeWinModal() {
 
-    document
-        .getElementById('win-modal')
-        .classList
-        .add('hidden');
+    document.getElementById(
+        'win-modal'
+    ).classList.add('hidden');
 
 }
 
 
 
 /* ============================================================
-   DRAW ELEMENT - مستقل عن السؤال
+   DRAW ELEMENT
    ============================================================ */
 
 function drawNextElement() {
 
-    const availableElements =
+    const available =
         RAW_BINGO_ELEMENTS.filter(
             item =>
-                !gameState.drawnElements
-                    .some(d => d.id === item.id)
+                !gameState.drawnElements.some(
+                    drawn =>
+                        drawn.id === item.id
+                )
         );
 
 
-    /* إذا خلصت العناصر */
+    if (available.length === 0) {
 
-    if (availableElements.length === 0) {
-
-        document.getElementById('card-name').innerText =
-            "تم سحب جميع العناصر";
-
-
-        document.getElementById('btn-draw-element').disabled =
-            true;
+        document.getElementById(
+            'card-name'
+        ).innerText =
+            'تم سحب جميع العناصر';
 
 
-        document.getElementById('btn-draw-element').style.opacity =
-            '0.5';
+        const button =
+            document.getElementById(
+                'btn-draw-element'
+            );
+
+
+        button.disabled = true;
+
+        button.style.opacity = '0.5';
 
 
         return;
@@ -1900,20 +2082,22 @@ function drawNextElement() {
     }
 
 
-    /* اختيار عنصر عشوائي */
-
-    const randEl =
-        availableElements[
+    const element =
+        available[
             Math.floor(
                 Math.random() *
-                availableElements.length
+                available.length
             )
         ];
 
 
-    gameState.drawnElements.push(randEl);
+    gameState.drawnElements.push(
+        element
+    );
 
-    gameState.currentElement = randEl;
+
+    gameState.currentElement =
+        element;
 
 
     updateElementDisplay();
@@ -1925,7 +2109,7 @@ function drawNextElement() {
 
 
 /* ============================================================
-   UPDATE ELEMENT DISPLAY
+   ELEMENT DISPLAY
    ============================================================ */
 
 function updateElementDisplay() {
@@ -1939,7 +2123,7 @@ function updateElementDisplay() {
     }
 
 
-    const display =
+    const card =
         document.getElementById(
             'current-card-display'
         );
@@ -1957,15 +2141,15 @@ function updateElementDisplay() {
         );
 
 
-    display.classList.remove(
+    card.classList.remove(
         'drawing-animation'
     );
 
 
-    void display.offsetWidth;
+    void card.offsetWidth;
 
 
-    display.classList.add(
+    card.classList.add(
         'drawing-animation'
     );
 
@@ -1973,8 +2157,10 @@ function updateElementDisplay() {
     setTimeout(() => {
 
         icon.className =
-            `fa-solid ${element.icon}
-             text-lg text-saudi-green`;
+            `fa-solid
+             ${element.icon}
+             text-xl
+             text-saudi-green`;
 
 
         name.innerText =
@@ -1990,40 +2176,45 @@ function updateElementDisplay() {
             'text-saudi-dark'
         );
 
-    }, 250);
+    }, 200);
 
 }
 
 
 
 /* ============================================================
-   DRAW QUESTION - مستقل عن العنصر
+   DRAW QUESTION
    ============================================================ */
 
 function drawNextQuestion() {
 
-    const availableQuestions =
+    const available =
         QUESTIONS_BANK.filter(
             question =>
-                !gameState.drawnQuestions
-                    .some(q => q.id === question.id)
+                !gameState.drawnQuestions.some(
+                    drawn =>
+                        drawn.id === question.id
+                )
         );
 
 
-    /* إذا خلصت الأسئلة */
+    if (available.length === 0) {
 
-    if (availableQuestions.length === 0) {
-
-        document.getElementById('question-text').innerText =
-            "تم سحب جميع الأسئلة الـ50!";
-
-
-        document.getElementById('btn-draw-question').disabled =
-            true;
+        document.getElementById(
+            'question-text'
+        ).innerText =
+            'تم سحب جميع الأسئلة الـ50!';
 
 
-        document.getElementById('btn-draw-question').style.opacity =
-            '0.5';
+        const button =
+            document.getElementById(
+                'btn-draw-question'
+            );
+
+
+        button.disabled = true;
+
+        button.style.opacity = '0.5';
 
 
         return;
@@ -2031,24 +2222,22 @@ function drawNextQuestion() {
     }
 
 
-    /* اختيار سؤال عشوائي */
-
-    const randomQuestion =
-        availableQuestions[
+    const question =
+        available[
             Math.floor(
                 Math.random() *
-                availableQuestions.length
+                available.length
             )
         ];
 
 
     gameState.drawnQuestions.push(
-        randomQuestion
+        question
     );
 
 
     gameState.currentQuestion =
-        randomQuestion;
+        question;
 
 
     updateQuestionDisplay();
@@ -2060,7 +2249,7 @@ function drawNextQuestion() {
 
 
 /* ============================================================
-   UPDATE QUESTION DISPLAY
+   QUESTION DISPLAY
    ============================================================ */
 
 function updateQuestionDisplay() {
@@ -2098,8 +2287,6 @@ function updateQuestionDisplay() {
         );
 
 
-    /* السؤال */
-
     questionText.innerText =
         question.q;
 
@@ -2113,8 +2300,6 @@ function updateQuestionDisplay() {
         'text-white'
     );
 
-
-    /* الإجابة */
 
     answerText.innerText =
         question.a;
@@ -2139,11 +2324,6 @@ function updateQuestionDisplay() {
     revealButton.disabled =
         false;
 
-
-    revealButton.classList.remove(
-        'cursor-not-allowed'
-    );
-
 }
 
 
@@ -2160,7 +2340,7 @@ function revealAnswer() {
         );
 
 
-    const revealButton =
+    const button =
         document.getElementById(
             'btn-reveal'
         );
@@ -2172,17 +2352,17 @@ function revealAnswer() {
     );
 
 
-    revealButton.style.opacity =
+    button.style.opacity =
         '0';
 
 
-    revealButton.disabled =
+    button.disabled =
         true;
 
 
     setTimeout(() => {
 
-        revealButton.style.display =
+        button.style.display =
             'none';
 
     }, 300);
@@ -2219,7 +2399,7 @@ function updateElementHistory() {
 
 
     const item =
-        document.createElement('div');
+        document.createElement('span');
 
 
     item.className =
@@ -2227,23 +2407,21 @@ function updateElementHistory() {
          text-white
          px-2 py-0.5
          rounded-xl
-         text-[10px]
+         text-[9px]
          font-bold
          border
-         border-saudi-green/50
-         flex items-center
-         gap-1`;
+         border-saudi-green/50`;
 
 
     item.innerHTML = `
 
-        <i class="fa-solid ${current.icon}
-                  text-saudi-gold">
+        <i class="fa-solid
+                  ${current.icon}
+                  text-saudi-gold
+                  ml-1">
         </i>
 
-        <span>
-            ${current.name}
-        </span>
+        ${current.name}
 
     `;
 
@@ -2285,7 +2463,7 @@ function updateQuestionHistory() {
 
 
     const item =
-        document.createElement('div');
+        document.createElement('span');
 
 
     item.className =
@@ -2293,24 +2471,21 @@ function updateQuestionHistory() {
          text-white
          px-2 py-0.5
          rounded-xl
-         text-[10px]
+         text-[9px]
          font-bold
          border
-         border-saudi-gold/40
-         flex items-center
-         gap-1`;
+         border-saudi-gold/40`;
 
 
     item.innerHTML = `
 
         <i class="fa-solid
                   fa-circle-question
-                  text-saudi-gold">
+                  text-saudi-gold
+                  ml-1">
         </i>
 
-        <span>
-            سؤال ${current.id}
-        </span>
+        سؤال ${current.id}
 
     `;
 
@@ -2325,7 +2500,7 @@ function updateQuestionHistory() {
 
 
 /* ============================================================
-   START GAME
+   START
    ============================================================ */
 
 window.addEventListener(
