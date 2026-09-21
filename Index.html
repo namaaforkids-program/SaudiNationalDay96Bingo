@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة بنقو التراثية - شاشة العرض والتحكم</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Cairo', 'sans-serif'],
+                    },
+                    colors: {
+                        saudi: {
+                            green: '#006C35',
+                            dark: '#003a1c',
+                            light: '#e6f3ec',
+                            gold: '#D4AF37',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #003a1c;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(#004f26 15%, transparent 16%),
+                radial-gradient(#004f26 15%, transparent 16%);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+        }
+
+        .glass-panel {
+            background: rgba(0, 58, 28, 0.90);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #006C35, #004f26);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: 2px solid #D4AF37;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, #007c3d, #005a2c);
+        }
+
+        .drawing-animation {
+            animation: flipIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes flipIn {
+            0% { transform: perspective(400px) rotateY(90deg) scale(0.9); opacity: 0; }
+            100% { transform: perspective(400px) rotateY(0deg) scale(1); opacity: 1; }
+        }
+
+        .win-modal {
+            background: rgba(0, 58, 28, 0.95);
+            border: 3px solid #D4AF37;
+            animation: popUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes popUp {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.5);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased justify-between">
+
+    <header class="w-full px-6 py-2 flex items-center justify-between border-b border-saudi-gold/20 bg-saudi-dark/80 backdrop-blur-md">
+        <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-saudi-gold animate-pulse"></span>
+            <h1 class="text-sm md:text-base font-black tracking-wide text-white drop-shadow-md">
+                لعبة بنقو اليوم الوطني 96
+            </h1>
+        </div>
+        
+        <!-- Store Logo Top Right (Namaa Logo) -->
+        <div class="w-12 h-12 md:w-14 md:h-14 bg-white rounded-full p-0.5 shadow-[0_0_15px_rgba(212,175,55,0.4)] border-2 border-saudi-gold flex items-center justify-center shrink-0 overflow-hidden">
+            <img src="https://placehold.co/150x150/ffffff/006c35?text=Namaa" alt="شعار نماء" id="store-logo-img" class="w-full h-full object-contain rounded-full bg-white">
+        </div>
+    </header>
+
+    <main class="w-full max-w-[1700px] mx-auto px-4 py-2 grid grid-cols-1 lg:grid-cols-12 gap-3 items-start my-auto">
+        
+        <!-- Team 1 Board (Left Side) -->
+        <section class="lg:col-span-3 glass-panel p-2.5 rounded-2xl flex flex-col shadow-2xl">
+            <div class="flex items-center justify-between mb-1.5 pb-1 border-b border-saudi-gold/20">
+                <input type="text" id="team1-name-input" value="فريق الأخضر" onchange="updateTeamName(1)" class="bg-transparent text-saudi-gold font-black text-xs md:text-sm border-b border-dashed border-saudi-gold/50 focus:outline-none w-28 px-1">
+                <span id="team1-score" class="bg-saudi-green text-white px-2 py-0.5 rounded-full text-[11px] font-bold border border-saudi-gold/30">1 / 25</span>
+            </div>
+            <p class="text-[9px] text-gray-300 mb-1.5 text-center">اضغط لتظليله بالأبيض الشفاف (أكمل خطاً للفوز!)</p>
+            <div id="team1-grid" class="grid grid-cols-5 gap-1">
+                <!-- Populated via JS (5x5) -->
+            </div>
+        </section>
+
+        <!-- Center Stage: Host Control & Question Area (6 Columns) -->
+        <section class="lg:col-span-6 flex flex-col gap-2.5">
+            
+            <!-- Question & Current Drawn Visual Card -->
+            <div class="glass-panel p-3 rounded-2xl shadow-2xl flex flex-col gap-2.5 border-2 border-saudi-gold/40">
+                
+                <div class="flex flex-col sm:flex-row gap-3 items-center">
+                    <!-- Current Drawn Visual Card -->
+                    <div class="w-24 h-24 md:w-28 md:h-28 shrink-0 relative">
+                        <div id="current-card-display" class="bg-white p-2 rounded-xl w-full h-full flex flex-col items-center justify-center shadow-xl border-3 border-saudi-gold text-center relative overflow-hidden">
+                            <div class="w-7 h-7 rounded-lg bg-saudi-light flex items-center justify-center mb-1 shadow-inner">
+                                <i id="card-icon" class="fa-solid fa-box-open text-base text-gray-400"></i>
+                            </div>
+                            <h3 id="card-name" class="text-[11px] font-black text-gray-400 truncate w-full">في انتظار السحب</h3>
+                        </div>
+                    </div>
+
+                    <!-- Question & Answer Area -->
+                    <div class="flex-1 flex flex-col justify-between w-full gap-2">
+                        <!-- Question -->
+                        <div class="bg-black/30 p-2.5 rounded-xl border border-white/10 relative">
+                            <div class="absolute -top-2.5 right-3 bg-saudi-gold text-saudi-dark px-2 py-0.5 rounded-full text-[10px] font-bold">
+                                <i class="fa-solid fa-circle-question mr-1"></i> السؤال الثقافي
+                            </div>
+                            <p id="question-text" class="text-xs md:text-sm font-bold text-gray-300 mt-1 min-h-[35px] flex items-center">
+                                اضغط على زر "سحب عنصر وسؤال جديد" للبدء بالمسابقة...
+                            </p>
+                        </div>
+
+                        <!-- Answer Box -->
+                        <div class="relative">
+                            <div class="absolute -top-2.5 right-3 bg-saudi-green text-white px-2 py-0.5 rounded-full text-[10px] font-bold z-10 border border-white/20">
+                                <i class="fa-solid fa-check-double mr-1"></i> الإجابة الصحيحة
+                            </div>
+                            <div id="answer-box" class="bg-white p-2 rounded-xl border-2 border-saudi-green shadow-md transition-all duration-300 blur-sm opacity-50 relative overflow-hidden">
+                                <p id="answer-text" class="text-xs font-black text-saudi-dark mt-1 min-h-[18px]">...</p>
+                                <button id="btn-reveal" onclick="revealAnswer()" disabled class="absolute inset-0 w-full h-full bg-saudi-light/90 backdrop-blur-sm flex items-center justify-center font-bold text-saudi-green text-xs hover:bg-saudi-light transition cursor-not-allowed">
+                                    <i class="fa-solid fa-eye ml-1"></i> اضغط لإظهار الإجابة
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Host Draw Button -->
+                <button id="btn-draw" onclick="drawNextItem()" class="btn-primary text-xs md:text-sm py-2 w-full flex items-center justify-center gap-2 shadow-xl cursor-pointer">
+                    <i class="fa-solid fa-arrows-rotate"></i> سحب عنصر وسؤال جديد
+                </button>
+            </div>
+
+            <!-- History Log / Drawn Pool -->
+            <div class="glass-panel p-2 rounded-2xl flex flex-col max-h-[75px]">
+                <h3 class="text-[11px] font-black text-white mb-1 flex items-center gap-1">
+                    <i class="fa-solid fa-clock-rotate-left text-saudi-gold"></i> العناصر المسحوبة سابـقاً
+                </h3>
+                <div class="overflow-y-auto flex-1 pr-1 flex flex-wrap gap-1" id="draw-history">
+                    <p class="text-[9px] text-gray-400 text-center py-0.5 w-full">لم يتم سحب أي عنصر بعد</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team 2 Board (Right Side) -->
+        <section class="lg:col-span-3 glass-panel p-2.5 rounded-2xl flex flex-col shadow-2xl">
+            <div class="flex items-center justify-between mb-1.5 pb-1 border-b border-saudi-gold/20">
+                <input type="text" id="team2-name-input" value="فريق المجد" onchange="updateTeamName(2)" class="bg-transparent text-saudi-gold font-black text-xs md:text-sm border-b border-dashed border-saudi-gold/50 focus:outline-none w-28 px-1">
+                <span id="team2-score" class="bg-saudi-green text-white px-2 py-0.5 rounded-full text-[11px] font-bold border border-saudi-gold/30">1 / 25</span>
+            </div>
+            <p class="text-[9px] text-gray-300 mb-1.5 text-center">اضغط لتظليله بالأبيض الشفاف (أكمل خطاً للفوز!)</p>
+            <div id="team2-grid" class="grid grid-cols-5 gap-1">
+                <!-- Populated via JS (5x5) -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full text-center py-1.5 text-[10px] text-gray-400 border-t border-saudi-gold/10">
+        لعبة بنقو التراثية - جميع الحقوق محفوظة
+    </footer>
+
+    <!-- Win Modal Popup -->
+    <div id="win-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="win-modal p-6 md:p-8 rounded-3xl max-w-md w-full text-center shadow-2xl flex flex-col items-center gap-4">
+            <div class="w-20 h-20 bg-saudi-gold rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                <i class="fa-solid fa-trophy text-4xl text-saudi-dark"></i>
+            </div>
+            <h2 id="win-title" class="text-2xl md:text-3xl font-black text-saudi-gold">مبروك الفوز!</h2>
+            <p id="win-message" class="text-sm md:text-base text-gray-200 font-bold">استطاع الفريق تحقيق خط مستقيم بنجاح ودام عزك يا وطن!</p>
+            <button onclick="closeWinModal()" class="btn-primary text-base py-2.5 px-8 mt-2">
+                استمرار اللعب / إعادة تعيين
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Load the user provided logo image
+        window.addEventListener('DOMContentLoaded', () => {
+            const imgEl = document.getElementById('store-logo-img');
+            if(imgEl) {
+                imgEl.src = "image_4.png";
+                imgEl.onerror = function() {
+                    this.src = 'https://placehold.co/150x150/ffffff/006c35?text=Namaa';
+                };
+            }
+            renderTeamBoards();
+        });
+
+        // 24 regular elements + 1 FREE center cell inserted at index 12 in 5x5 grid
+        const RAW_BINGO_ELEMENTS = [
+            { id: 'b1', name: 'العلا', icon: 'fa-mountain-sun' },
+            { id: 'b2', name: 'الخيل', icon: 'fa-horse-head' },
+            { id: 'b3', name: 'السيف', icon: 'fa-khanda' },
+            { id: 'b4', name: 'النخلة', icon: 'fa-tree' },
+            { id: 'b5', name: 'الرياض', icon: 'fa-city' },
+            { id: 'b6', name: 'العلم', icon: 'fa-flag' },
+            { id: 'b7', name: 'القهوة', icon: 'fa-mug-hot' },
+            { id: 'b8', name: 'التراث', icon: 'fa-landmark' },
+            { id: 'b9', name: 'الخيمة', icon: 'fa-campground' },
+            { id: 'b10', name: 'الصقر', icon: 'fa-feather-pointed' },
+            { id: 'b11', name: 'الدلة', icon: 'fa-fire-burner' },
+            { id: 'b12', name: 'الفنجال', icon: 'fa-mug-saucer' },
+            // Index 12 will be FREE in 5x5 grid
+            { id: 'b13', name: 'الأخضر', icon: 'fa-palette' },
+            { id: 'b14', name: 'الصحراء', icon: 'fa-sun' },
+            { id: 'b15', name: 'المصمك', icon: 'fa-chess-rook' },
+            { id: 'b16', name: 'التمر', icon: 'fa-bowl-food' },
+            { id: 'b17', name: 'اليوم الوطني', icon: 'fa-calendar-day' },
+            { id: 'b18', name: 'جدة', icon: 'fa-water' },
+            { id: 'b19', name: 'المسجد', icon: 'fa-mosque' },
+            { id: 'b20', name: 'الكثبان', icon: 'fa-wind' },
+            { id: 'b21', name: 'الفخار', icon: 'fa-jar' },
+            { id: 'b22', name: 'السدو', icon: 'fa-rug' },
+            { id: 'b23', name: 'العرضة', icon: 'fa-people-group' },
+            { id: 'b24', name: 'الجمل', icon: 'fa-paw' }
+        ];
+
+        // Helper to get exact 5x5 array with FREE at index 12
+        function getFullBoardElements() {
+            const list = [...RAW_BINGO_ELEMENTS];
+            list.splice(12, 0, { id: 'free', name: 'FREE', icon: 'fa-star', isFree: true });
+            return list;
+        }
+
+        const QUESTIONS_BANK = [
+            { id: 1, q: "متى توحّدت المملكة العربية السعودية؟", a: "23 سبتمبر 1932م." },
+            { id: 2, q: "من هو مؤسس المملكة العربية السعودية؟", a: "الملك عبدالعزيز بن عبدالرحمن آل سعود." },
+            { id: 3, q: "ما اسم الدولة قبل توحيدها؟", a: "مملكة الحجاز ونجد وملحقاتها." },
+            { id: 4, q: "كم سنة استغرق توحيد المملكة؟", a: "32 سنة تقريبًا." },
+            { id: 5, q: "ما المدينة التي استعادها الملك عبدالعزيز وكانت نقطة انطلاق التوحيد؟", a: "الرياض." },
+            { id: 6, q: "ما اسم أول ملك للمملكة العربية السعودية؟", a: "الملك عبدالعزيز." },
+            { id: 7, q: "ما المناسبة التي نحتفل بها في 23 سبتمبر؟", a: "اليوم الوطني السعودي." },
+            { id: 8, q: "ما الفرق بين اليوم الوطني ويوم التأسيس؟", a: "الوطني ذكرى توحيد المملكة 1932م، والتأسيس ذكرى تأسيس الدولة الأولى 1727م." },
+            { id: 9, q: "ما عاصمة المملكة العربية السعودية؟", a: "الرياض." },
+            { id: 10, q: "كم عدد مناطق المملكة الإدارية؟", a: "13 منطقة." },
+            { id: 11, q: "ما أكبر منطقة إدارية في السعودية من حيث المساحة؟", a: "المنطقة الشرقية." },
+            { id: 12, q: "ما أعلى قمة جبلية في السعودية؟", a: "جبل السودة." },
+            { id: 13, q: "ما اسم العملة السعودية؟", a: "الريال السعودي." },
+            { id: 14, q: "ما اسم النشيد الوطني السعودي؟", a: "سارعي للمجد والعلياء." },
+            { id: 15, q: "ما رمزا شعار المملكة العربية السعودية؟", a: "سيفان متقاطعان ونخلة." },
+            { id: 16, q: "متى أُطلقت رؤية السعودية 2030؟", a: "عام 2016م." },
+            { id: 17, q: "من صاحب فكرة رؤية السعودية 2030؟", a: "الأمير محمد بن سلمان." },
+            { id: 18, q: "ما الهدف الأساسي من رؤية السعودية 2030؟", a: "تنويع الاقتصاد وتقليل الاعتماد على النفط." },
+            { id: 19, q: "ما اسم المشروع السياحي العالمي في منطقة العلا؟", a: "مشروع تطوير العلا." },
+            { id: 20, q: "صح أم خطأ: اليوم الوطني السعودي يصادف 23 سبتمبر.", a: "صح." },
+            { id: 21, q: "صح أم خطأ: عاصمة السعودية هي جدة.", a: "خطأ، العاصمة الرياض." },
+            { id: 22, q: "صح أم خطأ: شعار المملكة العربية السعودية نخلة وسيفان.", a: "صح." },
+            { id: 23, q: "ما أكثر إنجاز سعودي تفخر به؟", a: "توحيد المملكة وتطورها في مختلف المجالات." },
+            { id: 24, q: "ما رسالتك لليوم الوطني؟", a: "دام عزك يا وطن الأمن والأمان." }
+        ];
+
+        const gameState = {
+            team1Name: 'فريق الأخضر',
+            team2Name: 'فريق المجد',
+            drawnElements: [],
+            drawnQuestions: [],
+            currentItem: null,
+            team1Checked: { 'free': true }, // FREE is permanent helper box
+            team2Checked: { 'free': true },
+            hasTeam1Won: false,
+            hasTeam2Won: false
+        };
+
+        function updateTeamName(teamNum) {
+            if (teamNum === 1) {
+                gameState.team1Name = document.getElementById('team1-name-input').value;
+            } else {
+                gameState.team2Name = document.getElementById('team2-name-input').value;
+            }
+        }
+
+        function renderTeamBoards() {
+            const grid1 = document.getElementById('team1-grid');
+            const grid2 = document.getElementById('team2-grid');
+            
+            grid1.innerHTML = '';
+            grid2.innerHTML = '';
+
+            const boardElements = getFullBoardElements();
+
+            boardElements.forEach(el => {
+                // Team 1 Item
+                const isChecked1 = gameState.team1Checked[el.id];
+                const item1 = document.createElement('div');
+                if (el.isFree) {
+                    item1.className = `p-1 rounded-lg text-center flex flex-col items-center justify-center aspect-square border bg-white/40 text-saudi-gold border-saudi-gold font-black shadow-md`;
+                    item1.innerHTML = `
+                        <i class="fa-solid ${el.icon} text-xs mb-0.5 text-saudi-gold"></i>
+                        <span class="text-[8px] leading-tight text-saudi-gold font-black">FREE</span>
+                    `;
+                } else {
+                    item1.className = `p-1 rounded-lg text-center cursor-pointer transition flex flex-col items-center justify-center aspect-square border ${isChecked1 ? 'bg-white/35 text-white border-white shadow-lg backdrop-blur-sm font-bold scale-[0.98]' : 'bg-black/25 text-gray-300 border-white/10 hover:bg-black/40'}`;
+                    item1.onclick = () => toggleTeamCell(1, el.id);
+                    item1.innerHTML = `
+                        <i class="fa-solid ${el.icon} text-xs mb-0.5 ${isChecked1 ? 'text-white' : 'text-saudi-gold'}"></i>
+                        <span class="text-[8px] leading-tight truncate w-full">${el.name}</span>
+                    `;
+                }
+                grid1.appendChild(item1);
+
+                // Team 2 Item
+                const isChecked2 = gameState.team2Checked[el.id];
+                const item2 = document.createElement('div');
+                if (el.isFree) {
+                    item2.className = `p-1 rounded-lg text-center flex flex-col items-center justify-center aspect-square border bg-white/40 text-saudi-gold border-saudi-gold font-black shadow-md`;
+                    item2.innerHTML = `
+                        <i class="fa-solid ${el.icon} text-xs mb-0.5 text-saudi-gold"></i>
+                        <span class="text-[8px] leading-tight text-saudi-gold font-black">FREE</span>
+                    `;
+                } else {
+                    item2.className = `p-1 rounded-lg text-center cursor-pointer transition flex flex-col items-center justify-center aspect-square border ${isChecked2 ? 'bg-white/35 text-white border-white shadow-lg backdrop-blur-sm font-bold scale-[0.98]' : 'bg-black/25 text-gray-300 border-white/10 hover:bg-black/40'}`;
+                    item2.onclick = () => toggleTeamCell(2, el.id);
+                    item2.innerHTML = `
+                        <i class="fa-solid ${el.icon} text-xs mb-0.5 ${isChecked2 ? 'text-white' : 'text-saudi-gold'}"></i>
+                        <span class="text-[8px] leading-tight truncate w-full">${el.name}</span>
+                    `;
+                }
+                grid2.appendChild(item2);
+            });
+
+            const score1 = Object.values(gameState.team1Checked).filter(Boolean).length;
+            const score2 = Object.values(gameState.team2Checked).filter(Boolean).length;
+            document.getElementById('team1-score').innerText = `${score1} / 25`;
+            document.getElementById('team2-score').innerText = `${score2} / 25`;
+
+            checkWinConditions();
+        }
+
+        function toggleTeamCell(teamNum, elementId) {
+            if (elementId === 'free') return;
+            if (teamNum === 1) {
+                gameState.team1Checked[elementId] = !gameState.team1Checked[elementId];
+            } else {
+                gameState.team2Checked[elementId] = !gameState.team2Checked[elementId];
+            }
+            renderTeamBoards();
+        }
+
+        function checkWinConditions() {
+            const board = getFullBoardElements();
+            const matrix1 = [];
+            const matrix2 = [];
+            
+            for (let r = 0; r < 5; r++) {
+                const row1 = [];
+                const row2 = [];
+                for (let c = 0; c < 5; c++) {
+                    const el = board[r * 5 + c];
+                    const isChecked1 = el.isFree ? true : !!gameState.team1Checked[el.id];
+                    const isChecked2 = el.isFree ? true : !!gameState.team2Checked[el.id];
+                    row1.push(isChecked1);
+                    row2.push(isChecked2);
+                }
+                matrix1.push(row1);
+                matrix2.push(row2);
+            }
+
+            if (!gameState.hasTeam1Won && hasCompletedLine(matrix1)) {
+                gameState.hasTeam1Won = true;
+                showWinModal(gameState.team1Name);
+            } else if (!gameState.hasTeam2Won && hasCompletedLine(matrix2)) {
+                gameState.hasTeam2Won = true;
+                showWinModal(gameState.team2Name);
+            }
+        }
+
+        function hasCompletedLine(matrix) {
+            // Check rows
+            for (let r = 0; r < 5; r++) {
+                if (matrix[r].every(val => val)) return true;
+            }
+            // Check columns
+            for (let c = 0; c < 5; c++) {
+                let colWin = true;
+                for (let r = 0; r < 5; r++) {
+                    if (!matrix[r][c]) {
+                        colWin = false;
+                        break;
+                    }
+                }
+                if (colWin) return true;
+            }
+            // Check diagonal top-left to bottom-right
+            let diag1Win = true;
+            for (let i = 0; i < 5; i++) {
+                if (!matrix[i][i]) {
+                    diag1Win = false;
+                    break;
+                }
+            }
+            if (diag1Win) return true;
+
+            // Check diagonal top-right to bottom-left
+            let diag2Win = true;
+            for (let i = 0; i < 5; i++) {
+                if (!matrix[i][4 - i]) {
+                    diag2Win = false;
+                    break;
+                }
+            }
+            if (diag2Win) return true;
+
+            return false;
+        }
+
+        function showWinModal(teamName) {
+            document.getElementById('win-title').innerText = `مبروك الفوز لـ ${teamName}!`;
+            document.getElementById('win-message').innerText = `استطاع الفريق إكمال خط مستقيم بنجاح بفضل المربع المساعد ودام عزك يا وطن!`;
+            document.getElementById('win-modal').classList.remove('hidden');
+        }
+
+        function closeWinModal() {
+            document.getElementById('win-modal').classList.add('hidden');
+        }
+
+        function drawNextItem() {
+            const availableElements = RAW_BINGO_ELEMENTS.filter(item => !gameState.drawnElements.some(d => d.id === item.id));
+            if (availableElements.length === 0) {
+                document.getElementById('question-text').innerText = "تم سحب جميع عناصر البنقو!";
+                return;
+            }
+
+            const randEl = availableElements[Math.floor(Math.random() * availableElements.length)];
+            
+            const availableQ = QUESTIONS_BANK.filter(q => !gameState.drawnQuestions.some(d => d.id === q.id));
+            let randQ = { q: "سؤال مفتوح للمقدم", a: "إجابة حرة" };
+            if (availableQ.length > 0) {
+                randQ = availableQ[Math.floor(Math.random() * availableQ.length)];
+                gameState.drawnQuestions.push(randQ);
+            }
+
+            gameState.drawnElements.push(randEl);
+            gameState.currentItem = { element: randEl, question: randQ };
+
+            updateHostDisplay();
+            updateHistoryLog();
+        }
+
+        function updateHostDisplay() {
+            const item = gameState.currentItem;
+            if(!item) return;
+
+            const display = document.getElementById('current-card-display');
+            const icon = document.getElementById('card-icon');
+            const name = document.getElementById('card-name');
+            const qText = document.getElementById('question-text');
+            const aText = document.getElementById('answer-text');
+            const answerBox = document.getElementById('answer-box');
+            const btnReveal = document.getElementById('btn-reveal');
+
+            answerBox.classList.add('blur-sm', 'opacity-50');
+            btnReveal.style.display = 'flex';
+            btnReveal.style.opacity = '1';
+            btnReveal.disabled = false;
+            btnReveal.classList.remove('cursor-not-allowed');
+
+            display.classList.remove('drawing-animation');
+            void display.offsetWidth;
+            display.classList.add('drawing-animation');
+
+            setTimeout(() => {
+                icon.className = `fa-solid ${item.element.icon} text-lg text-saudi-green`;
+                name.innerText = item.element.name;
+                name.classList.replace('text-gray-400', 'text-saudi-dark');
+
+                qText.innerText = item.question.q;
+                qText.classList.replace('text-gray-300', 'text-white');
+                aText.innerText = item.question.a;
+            }, 250);
+        }
+
+        function revealAnswer() {
+            const answerBox = document.getElementById('answer-box');
+            const btnReveal = document.getElementById('btn-reveal');
+            
+            answerBox.classList.remove('blur-sm', 'opacity-50');
+            btnReveal.style.opacity = '0';
+            btnReveal.disabled = true;
+            setTimeout(() => {
+                btnReveal.style.display = 'none';
+            }, 300);
+        }
+
+        function updateHistoryLog() {
+            const logContainer = document.getElementById('draw-history');
+            if (gameState.drawnElements.length === 1) {
+                logContainer.innerHTML = '';
+            }
+
+            const current = gameState.drawnElements[gameState.drawnElements.length - 1];
+            const span = document.createElement('div');
+            span.className = 'bg-saudi-green/30 text-white px-2 py-0.5 rounded-xl text-[10px] font-bold border border-saudi-green/50 flex items-center gap-1';
+            span.innerHTML = `
+                <i class="fa-solid ${current.icon} text-saudi-gold"></i>
+                <span>${current.name}</span>
+            `;
+            logContainer.insertBefore(span, logContainer.firstChild);
+        }
+    </script>
+</body>
+</html>
