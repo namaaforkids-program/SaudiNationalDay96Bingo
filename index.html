@@ -4,16 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>بينجو اليوم الوطني السعودي 96</title>
+    <title>SaudiNationalDay96Bingo</title>
 
-    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Cairo Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
@@ -47,10 +44,6 @@
             touch-action: manipulation;
         }
 
-        /* =========================
-           MAIN APP
-        ========================= */
-
         .app {
             width: 100%;
             height: 100vh;
@@ -60,9 +53,7 @@
             overflow: hidden;
         }
 
-        /* =========================
-           HEADER
-        ========================= */
+        /* HEADER */
 
         .header {
             height: 80px;
@@ -112,9 +103,7 @@
             font-weight: 600;
         }
 
-        /* =========================
-           QUESTION
-        ========================= */
+        /* QUESTION */
 
         .question-section {
             width: min(1100px, 94%);
@@ -157,9 +146,7 @@
             cursor: pointer;
         }
 
-        /* =========================
-           CURRENT ELEMENT
-        ========================= */
+        /* ELEMENT */
 
         .element-section {
             display: flex;
@@ -208,9 +195,7 @@
             font-weight: 900;
         }
 
-        /* =========================
-           GAME AREA
-        ========================= */
+        /* GAME */
 
         .game-area {
             flex: 1;
@@ -225,9 +210,7 @@
             padding: 4px 0 10px;
         }
 
-        /* =========================
-           TEAM
-        ========================= */
+        /* TEAM */
 
         .team-panel {
             min-width: 0;
@@ -284,9 +267,7 @@
             white-space: nowrap;
         }
 
-        /* =========================
-           BINGO BOARD
-        ========================= */
+        /* BINGO */
 
         .bingo-board {
             flex: 1;
@@ -367,9 +348,7 @@
             color: #d8b247;
         }
 
-        /* =========================
-           CONTROLS
-        ========================= */
+        /* CONTROLS */
 
         .controls {
             width: min(850px, 94%);
@@ -438,9 +417,7 @@
             cursor: not-allowed;
         }
 
-        /* =========================
-           WIN MODAL
-        ========================= */
+        /* WIN */
 
         #win-modal {
             position: fixed;
@@ -565,9 +542,7 @@
             border: 1px solid rgba(255, 255, 255, 0.25);
         }
 
-        /* =========================
-           CONFETTI
-        ========================= */
+        /* CONFETTI */
 
         #confetti-container {
             position: fixed;
@@ -605,11 +580,10 @@
             }
         }
 
-        /* =========================
-           SMALL SCREENS
-        ========================= */
+        /* SMALL SCREEN */
 
         @media (max-height: 720px) {
+
             .header {
                 height: 65px;
                 min-height: 65px;
@@ -662,6 +636,7 @@
         }
 
         @media (max-width: 700px) {
+
             body {
                 overflow: auto;
             }
@@ -696,32 +671,39 @@
 
 <div class="app">
 
-    <!-- =========================
-         HEADER
-    ========================== -->
+    <!-- HEADER -->
 
     <header class="header">
 
-        <!-- LOGO - LEFT -->
+        <!-- LOGO LEFT -->
+
         <div class="logo-area">
+
             <img
                 src="./74C4E3DD-B884-454B-B50B-6663DD3B846E.png"
                 alt="شعار نماء"
             >
+
         </div>
 
-        <!-- TITLE - RIGHT -->
+        <!-- TITLE RIGHT -->
+
         <div class="title-area">
-            <h1>بينجو اليوم الوطني السعودي 96</h1>
-            <p>دام عزك يا وطن 🇸🇦</p>
+
+            <h1>
+                بينجو اليوم الوطني السعودي 96
+            </h1>
+
+            <p>
+                دام عزك يا وطن 🇸🇦
+            </p>
+
         </div>
 
     </header>
 
 
-    <!-- =========================
-         QUESTION
-    ========================== -->
+    <!-- QUESTION -->
 
     <section class="question-section">
 
@@ -734,28 +716,40 @@
         </p>
 
         <div id="answer-box">
+
             <span>الإجابة: </span>
+
             <span id="answer-text"></span>
+
         </div>
 
-        <button id="btn-reveal" type="button">
+        <button
+            id="btn-reveal"
+            type="button"
+        >
+
             <i class="fa-solid fa-eye"></i>
+
             إظهار الإجابة
+
         </button>
 
     </section>
 
 
-    <!-- =========================
-         CURRENT ELEMENT
-    ========================== -->
+    <!-- CURRENT ELEMENT -->
 
     <section class="element-section">
 
         <div class="element-card">
 
             <div class="element-icon">
-                <i id="element-icon" class="fa-solid fa-star"></i>
+
+                <i
+                    id="element-icon"
+                    class="fa-solid fa-star"
+                ></i>
+
             </div>
 
             <div id="element-name">
@@ -767,13 +761,13 @@
     </section>
 
 
-    <!-- =========================
-         TEAMS + BINGO BOARDS
-    ========================== -->
+    <!-- GAME -->
 
     <main class="game-area">
 
+
         <!-- TEAM 1 -->
+
         <section class="team-panel">
 
             <div class="team-header">
@@ -787,17 +781,25 @@
                 >
 
                 <div class="team-score">
-                    <span id="team1-score">0</span>
+
+                    <span id="team1-score">
+                        0
+                    </span>
+
                 </div>
 
             </div>
 
-            <div id="team1-board" class="bingo-board"></div>
+            <div
+                id="team1-board"
+                class="bingo-board"
+            ></div>
 
         </section>
 
 
         <!-- TEAM 2 -->
+
         <section class="team-panel">
 
             <div class="team-header">
@@ -811,21 +813,26 @@
                 >
 
                 <div class="team-score">
-                    <span id="team2-score">0</span>
+
+                    <span id="team2-score">
+                        0
+                    </span>
+
                 </div>
 
             </div>
 
-            <div id="team2-board" class="bingo-board"></div>
+            <div
+                id="team2-board"
+                class="bingo-board"
+            ></div>
 
         </section>
 
     </main>
 
 
-    <!-- =========================
-         CONTROLS
-    ========================== -->
+    <!-- CONTROLS -->
 
     <section class="controls">
 
@@ -834,17 +841,24 @@
             type="button"
             class="control-btn element-btn"
         >
+
             <i class="fa-solid fa-shuffle"></i>
+
             سحب عنصر
+
         </button>
+
 
         <button
             id="btn-draw-question"
             type="button"
             class="control-btn question-btn"
         >
+
             <i class="fa-solid fa-circle-question"></i>
+
             سحب سؤال
+
         </button>
 
     </section>
@@ -852,9 +866,7 @@
 </div>
 
 
-<!-- =========================
-     WIN MODAL
-========================== -->
+<!-- WIN MODAL -->
 
 <div id="win-modal">
 
@@ -863,7 +875,9 @@
     <div class="win-box">
 
         <div class="trophy">
+
             <i class="fa-solid fa-trophy"></i>
+
         </div>
 
         <h2 id="win-title">
@@ -871,7 +885,7 @@
         </h2>
 
         <p id="win-message">
-            استطاع الفريق إكمال خط مستقيم بنجاح!
+            استطاع الفريق إكمال خط مستقيم في لوحة البينجو!
         </p>
 
         <div class="win-buttons">
@@ -881,16 +895,22 @@
                 type="button"
                 class="win-btn reset-btn"
             >
+
                 <i class="fa-solid fa-rotate-right"></i>
+
                 إعادة اللعبة
+
             </button>
+
 
             <button
                 id="btn-continue-game"
                 type="button"
                 class="win-btn continue-btn"
             >
+
                 استمرار اللعب
+
             </button>
 
         </div>
@@ -946,198 +966,247 @@
             q: 'متى توحّدت المملكة العربية السعودية؟',
             a: '23 سبتمبر 1932م.'
         },
+
         {
             q: 'من هو مؤسس المملكة العربية السعودية؟',
             a: 'الملك عبدالعزيز بن عبدالرحمن آل سعود.'
         },
+
         {
             q: 'ما اسم الدولة قبل توحيدها؟',
             a: 'مملكة الحجاز ونجد وملحقاتها.'
         },
+
         {
             q: 'كم سنة استغرق توحيد المملكة؟',
             a: '32 سنة تقريبًا.'
         },
+
         {
             q: 'ما المدينة التي استعادها الملك عبدالعزيز وكانت نقطة انطلاق التوحيد؟',
             a: 'الرياض.'
         },
+
         {
             q: 'ما اسم أول ملك للمملكة العربية السعودية؟',
             a: 'الملك عبدالعزيز.'
         },
+
         {
             q: 'متى صدر مرسوم توحيد المملكة؟',
             a: '17 جمادى الأولى 1351هـ.'
         },
+
         {
             q: 'ما المناسبة التي نحتفل بها في 23 سبتمبر؟',
             a: 'اليوم الوطني السعودي.'
         },
+
         {
             q: 'ما الفرق بين اليوم الوطني ويوم التأسيس؟',
             a: 'اليوم الوطني ذكرى توحيد المملكة عام 1932م، ويوم التأسيس ذكرى تأسيس الدولة السعودية الأولى عام 1727م.'
         },
+
         {
             q: 'من هو أول ولي عهد في المملكة العربية السعودية؟',
             a: 'الأمير سعود بن عبدالعزيز آل سعود.'
         },
+
         {
             q: 'ما عاصمة المملكة العربية السعودية؟',
             a: 'الرياض.'
         },
+
         {
             q: 'كم عدد مناطق المملكة الإدارية؟',
             a: '13 منطقة.'
         },
+
         {
             q: 'ما أكبر منطقة إدارية في السعودية من حيث المساحة؟',
             a: 'المنطقة الشرقية.'
         },
+
         {
             q: 'ما أعلى قمة جبلية في السعودية؟',
             a: 'جبل السودة.'
         },
+
         {
             q: 'ما البحر الذي تطل عليه مدينة جدة؟',
             a: 'البحر الأحمر.'
         },
+
         {
             q: 'ما اسم العملة السعودية؟',
             a: 'الريال السعودي.'
         },
+
         {
             q: 'ما اسم النشيد الوطني السعودي؟',
             a: 'سارعي للمجد والعلياء.'
         },
+
         {
             q: 'ما رمزا شعار المملكة العربية السعودية؟',
             a: 'سيفان متقاطعان ونخلة.'
         },
+
         {
             q: 'ما أشهر مدينة سعودية تشتهر بالنخيل والتمور؟',
             a: 'الأحساء.'
         },
+
         {
             q: 'ما اسم المشروع السياحي الشهير في شمال غرب السعودية؟',
             a: 'مشروع نيوم.'
         },
+
         {
             q: 'متى أُطلقت رؤية السعودية 2030؟',
             a: 'عام 2016م.'
         },
+
         {
             q: 'من صاحب فكرة رؤية السعودية 2030؟',
             a: 'الأمير محمد بن سلمان.'
         },
+
         {
             q: 'ما الهدف الأساسي من رؤية السعودية 2030؟',
             a: 'تنويع الاقتصاد وتقليل الاعتماد على النفط.'
         },
+
         {
             q: 'ما اسم المشروع السياحي العالمي في منطقة العلا؟',
             a: 'مشروع تطوير العلا.'
         },
+
         {
             q: 'ما المشروع الذي يهدف إلى تطوير مدينة مستقبلية على ساحل البحر الأحمر؟',
             a: 'نيوم.'
         },
+
         {
             q: 'ما اسم المدينة الترفيهية الكبرى التي يجري تطويرها في الرياض؟',
             a: 'القدية.'
         },
+
         {
             q: 'ما أبرز القطاعات التي تستهدف رؤية 2030 تطويرها؟',
             a: 'السياحة، التقنية، الصناعة، الترفيه، والطاقة المتجددة.'
         },
+
         {
             q: 'ما الهدف من تطوير السياحة في السعودية؟',
             a: 'تنويع الاقتصاد وجذب الزوار والاستثمارات.'
         },
+
         {
             q: 'ما اسم المشروع الذي يهدف إلى تطوير السياحة الفاخرة على ساحل البحر الأحمر؟',
             a: 'مشروع البحر الأحمر.'
         },
+
         {
             q: 'ما اسم برنامج التحول الوطني؟',
             a: 'برنامج التحول الوطني، وهو أحد برامج تحقيق رؤية 2030.'
         },
+
         {
             q: 'اليوم الوطني السعودي يصادف 23 سبتمبر.',
             a: 'صح.'
         },
+
         {
             q: 'تأسست المملكة العربية السعودية عام 1932م.',
             a: 'صح.'
         },
+
         {
             q: 'الملك عبدالعزيز هو مؤسس المملكة العربية السعودية.',
             a: 'صح.'
         },
+
         {
             q: 'عاصمة السعودية هي جدة.',
             a: 'خطأ، العاصمة الرياض.'
         },
+
         {
             q: 'رؤية السعودية 2030 أُطلقت عام 2016م.',
             a: 'صح.'
         },
+
         {
             q: 'شعار المملكة العربية السعودية نخلة وسيفان.',
             a: 'صح.'
         },
+
         {
             q: 'يوم التأسيس هو ذكرى توحيد المملكة عام 1932م.',
             a: 'خطأ، يوم التأسيس ذكرى تأسيس الدولة السعودية الأولى عام 1727م.'
         },
+
         {
             q: 'تقع مدينة الرياض في المنطقة الشرقية.',
             a: 'خطأ، تقع في منطقة الرياض.'
         },
+
         {
             q: 'السعودية تطل على البحر الأحمر والخليج العربي.',
             a: 'صح.'
         },
+
         {
             q: 'مشروع نيوم يقع في جنوب السعودية.',
             a: 'خطأ، يقع في شمال غرب السعودية.'
         },
+
         {
             q: 'ماذا يعني لك اليوم الوطني السعودي؟',
             a: 'مناسبة أفتخر فيها بوحدة الوطن وتاريخه وإنجازاته.'
         },
+
         {
             q: 'ما أكثر إنجاز سعودي تفخر به؟',
             a: 'توحيد المملكة وتطورها في مختلف المجالات.'
         },
+
         {
             q: 'كيف يمكن للمواطن المساهمة في تحقيق رؤية 2030؟',
             a: 'بالعمل والإتقان والتعلم والمشاركة في تنمية الوطن.'
         },
+
         {
             q: 'ما أهم قيمة نتعلمها من تاريخ توحيد المملكة؟',
             a: 'الوحدة والعزيمة والتعاون.'
         },
+
         {
             q: 'كيف تغيّرت السعودية خلال السنوات الأخيرة؟',
             a: 'شهدت تطورًا في الاقتصاد والتقنية والسياحة والخدمات.'
         },
+
         {
             q: 'ما واجبنا تجاه وطننا؟',
             a: 'المحافظة على أمنه وممتلكاته والالتزام بالأنظمة.'
         },
+
         {
             q: 'ما الرسالة التي توجهها للأجيال القادمة؟',
             a: 'حافظوا على وطنكم وواصلوا مسيرة البناء والتقدم.'
         },
+
         {
             q: 'كيف نحافظ على الهوية الوطنية مع الانفتاح على العالم؟',
             a: 'بالتمسك بالقيم والتراث والاستفادة من التطور العالمي.'
         },
+
         {
             q: 'ما الذي يجعل اليوم الوطني مناسبة مميزة؟',
             a: 'أنه يجمع الناس للاحتفال بتاريخ الوطن وإنجازاته.'
         },
+
         {
             q: 'لو طلب منك إلقاء كلمة عن الوطن، ماذا تقول؟',
             a: 'وطني السعودية، فخرنا ومجدنا، نسأل الله أن يديم عليه الأمن والعز والرخاء.'
@@ -1153,12 +1222,15 @@
     const gameState = {
 
         team1Name: 'فريق الأخضر',
+
         team2Name: 'فريق المجد',
 
         drawnElements: [],
+
         drawnQuestions: [],
 
         currentElement: null,
+
         currentQuestion: null,
 
         team1Checked: {
@@ -1170,6 +1242,7 @@
         },
 
         hasTeam1Won: false,
+
         hasTeam2Won: false
 
     };
@@ -1177,25 +1250,23 @@
 
     /* =====================================================
        BOARD
+       FREE ALWAYS IN THE CENTER
     ===================================================== */
 
-    function getFullBoardElements() {
+    const boardElements = shuffle(
+        RAW_BINGO_ELEMENTS
+    );
 
-        const list = [...RAW_BINGO_ELEMENTS];
-
-        list.splice(
-            12,
-            0,
-            {
-                id: 'free',
-                name: 'FREE',
-                icon: 'fa-star',
-                isFree: true
-            }
-        );
-
-        return list;
-    }
+    boardElements.splice(
+        12,
+        0,
+        {
+            id: 'free',
+            name: 'FREE',
+            icon: 'fa-star',
+            isFree: true
+        }
+    );
 
 
     /* =====================================================
@@ -1206,11 +1277,25 @@
 
         const arr = [...array];
 
-        for (let i = arr.length - 1; i > 0; i--) {
+        for (
+            let i = arr.length - 1;
+            i > 0;
+            i--
+        ) {
 
-            const j = Math.floor(Math.random() * (i + 1));
+            const j =
+                Math.floor(
+                    Math.random() * (i + 1)
+                );
 
-            [arr[i], arr[j]] = [arr[j], arr[i]];
+            [
+                arr[i],
+                arr[j]
+            ] =
+            [
+                arr[j],
+                arr[i]
+            ];
 
         }
 
@@ -1219,16 +1304,7 @@
 
 
     /* =====================================================
-       CREATE BOARDS
-    ===================================================== */
-
-    const boardElements = shuffle(
-        getFullBoardElements()
-    );
-
-
-    /* =====================================================
-       RENDER TEAM BOARDS
+       RENDER BOARDS
     ===================================================== */
 
     function renderTeamBoards() {
@@ -1250,41 +1326,68 @@
     }
 
 
-    function renderBoard(boardId, checkedState, teamNum) {
+    function renderBoard(
+        boardId,
+        checkedState,
+        teamNum
+    ) {
 
-        const board = document.getElementById(boardId);
+        const board =
+            document.getElementById(boardId);
 
         board.innerHTML = '';
 
+
         boardElements.forEach(element => {
 
-            const cell = document.createElement('button');
+            const cell =
+                document.createElement('button');
 
             cell.type = 'button';
 
-            cell.className = 'bingo-cell';
+            cell.className =
+                'bingo-cell';
 
-            if (checkedState[element.id]) {
-                cell.classList.add('checked');
+
+            if (
+                checkedState[element.id]
+            ) {
+
+                cell.classList.add(
+                    'checked'
+                );
+
             }
+
 
             if (element.isFree) {
-                cell.classList.add('free');
+
+                cell.classList.add(
+                    'free'
+                );
+
             }
+
 
             cell.innerHTML = `
                 <i class="fa-solid ${element.icon}"></i>
                 <span>${element.name}</span>
             `;
 
+
             if (!element.isFree) {
 
                 cell.addEventListener(
                     'click',
-                    () => toggleTeamCell(teamNum, element.id)
+                    () =>
+                        toggleTeamCell(
+                            teamNum,
+                            element.id
+                        )
                 );
 
             }
+
 
             board.appendChild(cell);
 
@@ -1294,17 +1397,23 @@
 
 
     /* =====================================================
-       TOGGLE CELL
+       TOGGLE
     ===================================================== */
 
-    function toggleTeamCell(teamNum, elementId) {
+    function toggleTeamCell(
+        teamNum,
+        elementId
+    ) {
 
         const checked =
             teamNum === 1
                 ? gameState.team1Checked
                 : gameState.team2Checked;
 
-        checked[elementId] = !checked[elementId];
+
+        checked[elementId] =
+            !checked[elementId];
+
 
         renderTeamBoards();
 
@@ -1317,28 +1426,43 @@
        SCORE
     ===================================================== */
 
-    function calculateScore(checkedState) {
+    function calculateScore(
+        checkedState
+    ) {
 
-        return Object.keys(checkedState)
-            .filter(id => checkedState[id])
-            .length - 1;
+        return Object.keys(
+            checkedState
+        )
+        .filter(
+            id => checkedState[id]
+        )
+        .length - 1;
 
     }
 
 
     function updateScores() {
 
-        document.getElementById('team1-score').textContent =
-            calculateScore(gameState.team1Checked);
+        document.getElementById(
+            'team1-score'
+        ).textContent =
+            calculateScore(
+                gameState.team1Checked
+            );
 
-        document.getElementById('team2-score').textContent =
-            calculateScore(gameState.team2Checked);
+
+        document.getElementById(
+            'team2-score'
+        ).textContent =
+            calculateScore(
+                gameState.team2Checked
+            );
 
     }
 
 
     /* =====================================================
-       WIN CHECK
+       WIN CONDITIONS
     ===================================================== */
 
     function checkWinConditions() {
@@ -1349,6 +1473,7 @@
             gameState.team1Name
         );
 
+
         checkTeamWin(
             2,
             gameState.team2Checked,
@@ -1358,27 +1483,50 @@
     }
 
 
-    function checkTeamWin(teamNum, checkedState, teamName) {
+    function checkTeamWin(
+        teamNum,
+        checkedState,
+        teamName
+    ) {
 
         const matrix = [];
 
-        for (let row = 0; row < 5; row++) {
+
+        for (
+            let row = 0;
+            row < 5;
+            row++
+        ) {
 
             const currentRow = [];
 
-            for (let col = 0; col < 5; col++) {
 
-                const index = row * 5 + col;
+            for (
+                let col = 0;
+                col < 5;
+                col++
+            ) {
 
-                const element = boardElements[index];
+                const index =
+                    row * 5 + col;
+
+
+                const element =
+                    boardElements[index];
+
 
                 currentRow.push(
-                    !!checkedState[element.id]
+                    !!checkedState[
+                        element.id
+                    ]
                 );
 
             }
 
-            matrix.push(currentRow);
+
+            matrix.push(
+                currentRow
+            );
 
         }
 
@@ -1386,40 +1534,65 @@
         let won = false;
 
 
-        /* Rows */
+        /* ROWS */
 
-        for (let row = 0; row < 5; row++) {
+        for (
+            let row = 0;
+            row < 5;
+            row++
+        ) {
 
-            if (matrix[row].every(Boolean)) {
+            if (
+                matrix[row].every(Boolean)
+            ) {
+
                 won = true;
+
             }
 
         }
 
 
-        /* Columns */
+        /* COLUMNS */
 
-        for (let col = 0; col < 5; col++) {
+        for (
+            let col = 0;
+            col < 5;
+            col++
+        ) {
 
             let complete = true;
 
-            for (let row = 0; row < 5; row++) {
 
-                if (!matrix[row][col]) {
+            for (
+                let row = 0;
+                row < 5;
+                row++
+            ) {
+
+                if (
+                    !matrix[row][col]
+                ) {
+
                     complete = false;
+
                     break;
+
                 }
 
             }
 
+
             if (complete) {
+
                 won = true;
+
             }
 
         }
 
 
-        /* Main diagonal */
+        /* DIAGONAL 1 */
 
         if (
             matrix[0][0] &&
@@ -1428,11 +1601,13 @@
             matrix[3][3] &&
             matrix[4][4]
         ) {
+
             won = true;
+
         }
 
 
-        /* Other diagonal */
+        /* DIAGONAL 2 */
 
         if (
             matrix[0][4] &&
@@ -1441,7 +1616,9 @@
             matrix[3][1] &&
             matrix[4][0]
         ) {
+
             won = true;
+
         }
 
 
@@ -1454,7 +1631,9 @@
 
                 gameState.hasTeam1Won = true;
 
-                showWinModal(teamName);
+                showWinModal(
+                    teamName
+                );
 
             }
 
@@ -1466,7 +1645,9 @@
 
                 gameState.hasTeam2Won = true;
 
-                showWinModal(teamName);
+                showWinModal(
+                    teamName
+                );
 
             }
 
@@ -1485,7 +1666,8 @@
             RAW_BINGO_ELEMENTS.filter(
                 element =>
                     !gameState.drawnElements.some(
-                        drawn => drawn.id === element.id
+                        drawn =>
+                            drawn.id === element.id
                     )
             );
 
@@ -1496,9 +1678,12 @@
                 'btn-draw-element'
             ).disabled = true;
 
+
             document.getElementById(
                 'element-name'
-            ).textContent = 'انتهت العناصر';
+            ).textContent =
+                'انتهت العناصر';
+
 
             return;
 
@@ -1508,19 +1693,25 @@
         const element =
             available[
                 Math.floor(
-                    Math.random() * available.length
+                    Math.random() *
+                    available.length
                 )
             ];
 
 
-        gameState.drawnElements.push(element);
+        gameState.drawnElements.push(
+            element
+        );
 
-        gameState.currentElement = element;
+
+        gameState.currentElement =
+            element;
 
 
         document.getElementById(
             'element-name'
-        ).textContent = element.name;
+        ).textContent =
+            element.name;
 
 
         document.getElementById(
@@ -1540,7 +1731,9 @@
         const available =
             QUESTIONS.filter(
                 question =>
-                    !gameState.drawnQuestions.includes(question)
+                    !gameState.drawnQuestions.includes(
+                        question
+                    )
             );
 
 
@@ -1550,10 +1743,12 @@
                 'btn-draw-question'
             ).disabled = true;
 
+
             document.getElementById(
                 'question-text'
             ).textContent =
                 'انتهت جميع الأسئلة';
+
 
             return;
 
@@ -1563,34 +1758,43 @@
         const question =
             available[
                 Math.floor(
-                    Math.random() * available.length
+                    Math.random() *
+                    available.length
                 )
             ];
 
 
-        gameState.drawnQuestions.push(question);
+        gameState.drawnQuestions.push(
+            question
+        );
 
-        gameState.currentQuestion = question;
+
+        gameState.currentQuestion =
+            question;
 
 
         document.getElementById(
             'question-text'
-        ).textContent = question.q;
+        ).textContent =
+            question.q;
 
 
         document.getElementById(
             'answer-text'
-        ).textContent = question.a;
+        ).textContent =
+            question.a;
 
 
         document.getElementById(
             'answer-box'
-        ).style.display = 'none';
+        ).style.display =
+            'none';
 
 
         document.getElementById(
             'btn-reveal'
-        ).style.display = 'inline-block';
+        ).style.display =
+            'inline-block';
 
     }
 
@@ -1601,17 +1805,25 @@
 
     function revealAnswer() {
 
-        if (!gameState.currentQuestion) {
+        if (
+            !gameState.currentQuestion
+        ) {
+
             return;
+
         }
+
 
         document.getElementById(
             'answer-box'
-        ).style.display = 'block';
+        ).style.display =
+            'block';
+
 
         document.getElementById(
             'btn-reveal'
-        ).style.display = 'none';
+        ).style.display =
+            'none';
 
     }
 
@@ -1620,7 +1832,9 @@
        WIN MODAL
     ===================================================== */
 
-    function showWinModal(teamName) {
+    function showWinModal(
+        teamName
+    ) {
 
         document.getElementById(
             'win-title'
@@ -1636,7 +1850,9 @@
 
         document.getElementById(
             'win-modal'
-        ).classList.add('show');
+        ).classList.add(
+            'show'
+        );
 
 
         startCelebration();
@@ -1645,14 +1861,17 @@
 
 
     /* =====================================================
-       CLOSE WIN MODAL
+       CLOSE MODAL
     ===================================================== */
 
     function closeWinModal() {
 
         document.getElementById(
             'win-modal'
-        ).classList.remove('show');
+        ).classList.remove(
+            'show'
+        );
+
 
         clearCelebration();
 
@@ -1678,6 +1897,7 @@
             free: true
         };
 
+
         gameState.team2Checked = {
             free: true
         };
@@ -1701,12 +1921,14 @@
 
         document.getElementById(
             'answer-box'
-        ).style.display = 'none';
+        ).style.display =
+            'none';
 
 
         document.getElementById(
             'btn-reveal'
-        ).style.display = 'none';
+        ).style.display =
+            'none';
 
 
         document.getElementById(
@@ -1757,20 +1979,29 @@
 
 
         const confettiColors = [
+
             '#d8b247',
             '#ffffff',
             '#0b7a3b',
             '#9bd6a8'
+
         ];
 
 
-        for (let i = 0; i < pieces; i++) {
+        for (
+            let i = 0;
+            i < pieces;
+            i++
+        ) {
 
             const piece =
-                document.createElement('div');
+                document.createElement(
+                    'div'
+                );
 
 
-            piece.className = 'confetti';
+            piece.className =
+                'confetti';
 
 
             piece.style.left =
@@ -1800,11 +2031,9 @@
                 (Math.random() * 0.8) + 's';
 
 
-            piece.style.transform =
-                `rotate(${Math.random() * 360}deg)`;
-
-
-            container.appendChild(piece);
+            container.appendChild(
+                piece
+            );
 
         }
 
@@ -1822,13 +2051,14 @@
                 'confetti-container'
             );
 
+
         container.innerHTML = '';
 
     }
 
 
     /* =====================================================
-       TEAM NAME
+       TEAM NAMES
     ===================================================== */
 
     document.getElementById(
@@ -1861,7 +2091,6 @@
 
     /* =====================================================
        BUTTON EVENTS
-       مهم لضمان أن الأزرار تعمل
     ===================================================== */
 
     document.getElementById(
@@ -1905,7 +2134,7 @@
 
 
     /* =====================================================
-       INITIALIZE
+       START
     ===================================================== */
 
     renderTeamBoards();
