@@ -231,16 +231,8 @@
     <script>
         // Load the user provided logo image
         window.addEventListener('DOMContentLoaded', () => {
-            const imgEl = document.getElementById('store-logo-img');
-            if(imgEl) {
-                imgEl.src = "image_4.png";
-                imgEl.onerror = function() {
-                    this.src = 'https://placehold.co/150x150/ffffff/006c35?text=Namaa';
-                };
-            }
-            renderTeamBoards();
-        });
-
+    renderTeamBoards();
+});
         // 24 regular elements + 1 FREE center cell inserted at index 12 in 5x5 grid
         const RAW_BINGO_ELEMENTS = [
             { id: 'b1', name: 'العلا', icon: 'fa-mountain-sun' },
