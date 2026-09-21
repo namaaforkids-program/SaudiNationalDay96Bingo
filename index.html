@@ -5,46 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>لعبة بنقو اليوم الوطني 96</title>
+    <title>Saudi National Day 96 Bingo</title>
 
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    >
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap"
-        rel="stylesheet"
-    >
+    <!-- Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap"
+          rel="stylesheet">
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        cairo: ['Cairo', 'sans-serif']
+                        sans: ['Cairo', 'sans-serif'],
                     },
+
                     colors: {
                         saudi: {
                             green: '#006C35',
-                            dark: '#003B1D',
+                            dark: '#003a1c',
+                            light: '#e6f3ec',
                             gold: '#D4AF37',
-                            cream: '#F8F5E9'
                         }
                     }
                 }
             }
-        };
+        }
     </script>
 
-
     <style>
-
-        /* =========================================
-           BASIC
-        ========================================= */
 
         * {
             box-sizing: border-box;
@@ -55,1072 +50,413 @@
             width: 100%;
             height: 100%;
             margin: 0;
-            padding: 0;
         }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            background:
-                radial-gradient(
-                    circle at 20% 20%,
-                    rgba(0,108,53,.35),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 80% 80%,
-                    rgba(212,175,55,.08),
-                    transparent 35%
-                ),
-                #002d16;
-
+            background-color: #003a1c;
             color: white;
-
             overflow: hidden;
+            font-family: 'Cairo', sans-serif;
+
+            background-image:
+                radial-gradient(#004f26 15%, transparent 16%),
+                radial-gradient(#004f26 15%, transparent 16%);
+
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
         }
 
 
-        /* =========================================
-           APP LAYOUT
-        ========================================= */
+        /* =====================================================
+           MAIN APP
+           ===================================================== */
 
-        .app {
+        .app-wrapper {
             width: 100vw;
             height: 100vh;
 
-            display: grid;
-
-            grid-template-rows:
-                9vh
-                18vh
-                1fr
-                10vh;
-
-            overflow: hidden;
-        }
-
-
-        /* =========================================
-           HEADER
-        ========================================= */
-
-        .header {
             display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            padding:
-                1vh
-                3vw;
-
-            background:
-                rgba(0, 45, 22, .95);
-
-            border-bottom:
-                1px solid
-                rgba(212,175,55,.35);
-
-            min-height: 0;
-        }
-
-
-        .game-title {
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            font-size:
-                clamp(
-                    16px,
-                    1.8vw,
-                    28px
-                );
-
-            font-weight: 900;
-
-            white-space: nowrap;
-        }
-
-
-        .title-dot {
-            width: 10px;
-            height: 10px;
-
-            background:
-                #D4AF37;
-
-            border-radius: 50%;
-
-            box-shadow:
-                0 0 12px
-                rgba(212,175,55,.7);
-        }
-
-
-        .logo-container {
-            width:
-                clamp(
-                    45px,
-                    6vh,
-                    65px
-                );
-
-            height:
-                clamp(
-                    45px,
-                    6vh,
-                    65px
-                );
-
-            background: white;
-
-            border:
-                2px solid
-                #D4AF37;
-
-            border-radius: 50%;
-
-            padding: 3px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 0 18px
-                rgba(212,175,55,.3);
-
-            flex-shrink: 0;
-        }
-
-
-        .logo-container img {
-            width: 100%;
-            height: 100%;
-
-            object-fit: contain;
-
-            border-radius: 50%;
-        }
-
-
-        /* =========================================
-           QUESTION AREA
-        ========================================= */
-
-        .question-area {
-            min-height: 0;
-
-            padding:
-                1vh
-                3vw;
-
-            display: flex;
-
             flex-direction: column;
 
-            align-items: center;
-
-            justify-content: center;
-
-            gap: .7vh;
+            overflow: hidden;
         }
 
 
-        .question-label {
-            color:
-                #D4AF37;
+        /* =====================================================
+           GLASS
+           ===================================================== */
 
-            font-size:
-                clamp(
-                    10px,
-                    1vw,
-                    16px
-                );
+        .glass-panel {
+            background: rgba(0, 58, 28, 0.90);
 
-            font-weight: 900;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+
+            border: 1px solid rgba(212, 175, 55, 0.4);
+
+            box-shadow:
+                0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
 
-        .question-box {
-            width: 100%;
+        /* =====================================================
+           BUTTONS
+           ===================================================== */
 
-            max-width: 1100px;
-
-            min-height: 0;
-
-            padding:
-                1vh
-                2vw;
-
+        .btn-primary {
             background:
-                rgba(0,0,0,.22);
-
-            border:
-                1px solid
-                rgba(212,175,55,.3);
-
-            border-radius: 14px;
-
-            text-align: center;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-        }
-
-
-        #question-text {
-            margin: 0;
-
-            font-size:
-                clamp(
-                    12px,
-                    1.35vw,
-                    21px
+                linear-gradient(
+                    135deg,
+                    #006C35,
+                    #004f26
                 );
-
-            line-height: 1.45;
-
-            font-weight: 800;
 
             color: white;
+
+            padding: 0.65rem 1rem;
+
+            border-radius: 9999px;
+
+            font-weight: 900;
+
+            transition: all 0.3s;
+
+            border: 2px solid #D4AF37;
+
+            box-shadow:
+                0 4px 15px rgba(0, 0, 0, 0.3);
+
+            position: relative;
+            z-index: 1000;
+
+            pointer-events: auto;
+            cursor: pointer;
         }
 
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
 
-        /* =========================================
-           GAME AREA
-        ========================================= */
-
-        .game-area {
-            min-height: 0;
-
-            padding:
-                .8vh
-                2vw;
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: .8vh;
-
-            overflow: hidden;
-        }
-
-
-        /* =========================================
-           CURRENT ELEMENT
-        ========================================= */
-
-        .element-area {
-            flex-shrink: 0;
-
-            height:
-                9vh;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-        }
-
-
-        .element-card {
-            height: 100%;
-
-            min-width:
-                220px;
-
-            padding:
-                .5vh
-                2vw;
+            box-shadow:
+                0 6px 20px rgba(212, 175, 55, 0.4);
 
             background:
                 linear-gradient(
                     135deg,
-                    #ffffff,
-                    #f3f0df
+                    #007c3d,
+                    #005a2c
                 );
-
-            border:
-                2px solid
-                #D4AF37;
-
-            border-radius: 16px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 12px;
-
-            color:
-                #003B1D;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0,0,0,.3);
         }
 
 
-        .element-icon {
-            width:
-                45px;
-
-            height:
-                45px;
-
-            border-radius:
-                12px;
-
-            background:
-                #006C35;
-
-            color:
-                #D4AF37;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            font-size:
-                22px;
-
-            flex-shrink:
-                0;
-        }
-
-
-        .element-info {
-            text-align: center;
-        }
-
-
-        .element-label {
-            display: block;
-
-            font-size:
-                9px;
-
-            color:
-                #666;
-
-            font-weight:
-                700;
-        }
-
-
-        #card-name {
-            display: block;
-
-            font-size:
-                clamp(
-                    14px,
-                    1.4vw,
-                    22px
-                );
-
-            font-weight:
-                900;
-
-            white-space:
-                nowrap;
-        }
-
-
-        /* =========================================
-           TEAMS
-        ========================================= */
-
-        .teams {
-            min-height: 0;
-
-            flex: 1;
-
-            display: grid;
-
-            grid-template-columns:
-                1fr
-                1fr;
-
-            gap:
-                1.2vw;
-        }
-
-
-        .team {
-            min-width: 0;
-
-            min-height: 0;
-
-            background:
-                rgba(0,59,29,.78);
-
-            border:
-                1px solid
-                rgba(212,175,55,.35);
-
-            border-radius:
-                16px;
-
-            padding:
-                .8vh
-                .8vw;
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            overflow:
-                hidden;
-        }
-
-
-        .team-header {
-            height:
-                4vh;
-
-            min-height:
-                30px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-            gap:
-                10px;
-
-            padding:
-                0
-                .5vw;
-
-            flex-shrink:
-                0;
-
-            border-bottom:
-                1px solid
-                rgba(212,175,55,.2);
-        }
-
-
-        .team-name {
-            width:
-                55%;
-
-            min-width:
-                0;
-
-            background:
-                transparent;
-
-            border:
-                none;
-
-            border-bottom:
-                1px dashed
-                rgba(212,175,55,.5);
-
-            outline:
-                none;
-
-            color:
-                #D4AF37;
-
-            font-family:
-                'Cairo',
-                sans-serif;
-
-            font-size:
-                clamp(
-                    11px,
-                    1.15vw,
-                    18px
-                );
-
-            font-weight:
-                900;
-
-            text-align:
-                right;
-        }
-
-
-        .score {
-            background:
-                #006C35;
-
-            color:
-                white;
-
-            padding:
-                2px 10px;
-
-            border-radius:
-                999px;
-
-            font-size:
-                clamp(
-                    8px,
-                    .7vw,
-                    12px
-                );
-
-            font-weight:
-                800;
-
-            white-space:
-                nowrap;
-        }
-
-
-        /* =========================================
-           BINGO BOARD
-        ========================================= */
-
-        .bingo-grid {
-            flex:
-                1;
-
-            min-height:
-                0;
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(5, 1fr);
-
-            grid-template-rows:
-                repeat(5, 1fr);
-
-            gap:
-                clamp(
-                    3px,
-                    .35vw,
-                    7px
-                );
-
-            padding-top:
-                .7vh;
-        }
-
-
-        .bingo-cell {
-            min-width:
-                0;
-
-            min-height:
-                0;
-
-            width:
-                100%;
-
-            height:
-                100%;
-
-            border:
-                1px solid
-                rgba(255,255,255,.12);
-
-            border-radius:
-                clamp(
-                    5px,
-                    .6vw,
-                    10px
-                );
-
-            background:
-                rgba(0,0,0,.22);
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            text-align:
-                center;
-
-            gap:
-                2px;
-
-            cursor:
-                pointer;
-
-            overflow:
-                hidden;
-
-            transition:
-                .18s ease;
-        }
-
-
-        .bingo-cell:hover {
-            background:
-                rgba(212,175,55,.15);
-
-            border-color:
-                rgba(212,175,55,.7);
-
-            transform:
-                scale(1.025);
-        }
-
-
-        .bingo-cell.checked {
-            background:
-                linear-gradient(
-                    135deg,
-                    #087b42,
-                    #00552b
-                );
-
-            border:
-                2px solid
-                #D4AF37;
-
-            box-shadow:
-                0 0 10px
-                rgba(212,175,55,.2);
-        }
-
-
-        .bingo-cell.free {
+        .btn-question {
             background:
                 linear-gradient(
                     135deg,
                     #D4AF37,
-                    #b99324
+                    #b89525
                 );
 
-            color:
-                #003B1D;
+            color: #003a1c;
 
-            border:
-                2px solid
-                #f5dc79;
-        }
+            padding: 0.65rem 1rem;
 
+            border-radius: 9999px;
 
-        .bingo-cell i {
-            font-size:
-                clamp(
-                    9px,
-                    1.1vw,
-                    17px
-                );
+            font-weight: 900;
 
-            color:
-                #D4AF37;
-        }
+            transition: all 0.3s;
 
-
-        .bingo-cell.checked i {
-            color:
-                white;
-        }
-
-
-        .bingo-cell.free i {
-            color:
-                #003B1D;
-        }
-
-
-        .bingo-cell span {
-            font-size:
-                clamp(
-                    6px,
-                    .72vw,
-                    11px
-                );
-
-            font-weight:
-                800;
-
-            line-height:
-                1.15;
-
-            padding:
-                0 2px;
-        }
-
-
-        /* =========================================
-           BOTTOM
-        ========================================= */
-
-        .bottom-area {
-            min-height:
-                0;
-
-            padding:
-                .8vh
-                3vw;
-
-            background:
-                rgba(0,45,22,.96);
-
-            border-top:
-                1px solid
-                rgba(212,175,55,.25);
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap:
-                12px;
-
-            position:
-                relative;
-
-            z-index:
-                20;
-        }
-
-
-        .game-button {
-            min-width:
-                180px;
-
-            height:
-                6vh;
-
-            min-height:
-                38px;
-
-            border:
-                2px solid
-                #D4AF37;
-
-            border-radius:
-                999px;
-
-            padding:
-                0 25px;
-
-            font-family:
-                'Cairo',
-                sans-serif;
-
-            font-size:
-                clamp(
-                    10px,
-                    1vw,
-                    16px
-                );
-
-            font-weight:
-                900;
-
-            cursor:
-                pointer;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            gap:
-                8px;
-
-            transition:
-                .2s ease;
-
-            position:
-                relative;
-
-            z-index:
-                30;
-        }
-
-
-        .element-button {
-            background:
-                #006C35;
-
-            color:
-                white;
-        }
-
-
-        .question-button {
-            background:
-                #D4AF37;
-
-            color:
-                #003B1D;
-        }
-
-
-        .game-button:hover {
-            transform:
-                translateY(-2px);
+            border: 2px solid #f1d477;
 
             box-shadow:
-                0 6px 18px
-                rgba(212,175,55,.3);
+                0 4px 15px rgba(0, 0, 0, 0.3);
+
+            position: relative;
+            z-index: 1000;
+
+            pointer-events: auto;
+            cursor: pointer;
         }
 
-
-        .game-button:active {
-            transform:
-                translateY(0);
-        }
-
-
-        .game-button:disabled {
-            opacity:
-                .45;
-
-            cursor:
-                not-allowed;
-
-            transform:
-                none;
-        }
-
-
-        /* =========================================
-           ANSWER
-        ========================================= */
-
-        .answer-container {
-            position:
-                fixed;
-
-            top:
-                9vh;
-
-            left:
-                50%;
-
-            transform:
-                translateX(-50%);
-
-            width:
-                min(90vw, 900px);
-
-            z-index:
-                50;
-
-            display:
-                none;
-        }
-
-
-        /* =========================================
-           MODAL
-        ========================================= */
-
-        .modal {
-            position:
-                fixed;
-
-            inset:
-                0;
-
-            background:
-                rgba(0,0,0,.78);
-
-            backdrop-filter:
-                blur(6px);
-
-            display:
-                none;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            z-index:
-                100;
-
-            padding:
-                20px;
-        }
-
-
-        .modal.show {
-            display:
-                flex;
-        }
-
-
-        .modal-content {
-            background:
-                #003B1D;
-
-            border:
-                3px solid
-                #D4AF37;
-
-            border-radius:
-                24px;
-
-            padding:
-                30px;
-
-            width:
-                min(90vw, 450px);
-
-            text-align:
-                center;
+        .btn-question:hover:not(:disabled) {
+            transform: translateY(-2px);
 
             box-shadow:
-                0 20px 60px
-                rgba(0,0,0,.5);
+                0 6px 20px rgba(212, 175, 55, 0.5);
         }
 
 
-        /* =========================================
-           SMALL HEIGHT SCREENS
-        ========================================= */
+        button:disabled {
+            cursor: not-allowed !important;
+        }
 
-        @media (max-height: 650px) {
 
-            .app {
-                grid-template-rows:
-                    8vh
-                    16vh
-                    1fr
-                    11vh;
-            }
+        /* =====================================================
+           BINGO CELL
+           ===================================================== */
 
-            .element-area {
-                height:
-                    7vh;
-            }
+        .bingo-cell {
+            min-width: 0;
+            min-height: 0;
 
-            .element-icon {
-                width:
-                    32px;
+            aspect-ratio: 1 / 1;
 
-                height:
-                    32px;
+            border-radius: 12px;
 
-                font-size:
-                    15px;
-            }
+            display: flex;
+            flex-direction: column;
 
-            .team-header {
-                height:
-                    3.5vh;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            transition: all 0.2s;
+
+            overflow: hidden;
+
+            user-select: none;
+
+            position: relative;
+            z-index: 5;
+        }
+
+        .bingo-cell:not(.is-free) {
+            cursor: pointer;
+        }
+
+        .bingo-cell:not(.is-free):hover {
+            transform: scale(1.02);
+            background: rgba(0, 79, 38, 0.6);
+            border-color: rgba(212, 175, 55, 0.7);
+        }
+
+
+        @media (min-width: 768px) {
+
+            .bingo-cell {
+                border-radius: 15px;
             }
 
         }
 
 
-        /* =========================================
+        /* =====================================================
+           DRAWING ANIMATION
+           ===================================================== */
+
+        .drawing-animation {
+            animation:
+                flipIn 0.5s
+                cubic-bezier(
+                    0.175,
+                    0.885,
+                    0.32,
+                    1.275
+                );
+        }
+
+        @keyframes flipIn {
+
+            0% {
+                transform:
+                    perspective(400px)
+                    rotateY(90deg)
+                    scale(0.9);
+
+                opacity: 0;
+            }
+
+            100% {
+                transform:
+                    perspective(400px)
+                    rotateY(0deg)
+                    scale(1);
+
+                opacity: 1;
+            }
+        }
+
+
+        /* =====================================================
+           WIN MODAL
+           ===================================================== */
+
+        .win-modal {
+            background:
+                rgba(0, 58, 28, 0.97);
+
+            border: 3px solid #D4AF37;
+
+            animation:
+                popUp 0.4s
+                cubic-bezier(
+                    0.175,
+                    0.885,
+                    0.32,
+                    1.275
+                );
+        }
+
+        @keyframes popUp {
+
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+
+        /* =====================================================
+           CELEBRATION
+           ===================================================== */
+
+        #celebration {
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            z-index: 9999;
+
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+
+            top: -30px;
+
+            width: 9px;
+            height: 16px;
+
+            animation:
+                confettiFall 3.5s linear forwards;
+        }
+
+        @keyframes confettiFall {
+
+            0% {
+                transform:
+                    translateY(-30px)
+                    rotate(0deg);
+
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
+
+                opacity: 0;
+            }
+        }
+
+        .celebration-pulse {
+            animation:
+                celebrationPulse 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes celebrationPulse {
+
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.08);
+            }
+        }
+
+
+        /* =====================================================
+           RESET BUTTON
+           ===================================================== */
+
+        .btn-reset {
+            background:
+                linear-gradient(
+                    135deg,
+                    #D4AF37,
+                    #b89525
+                );
+
+            color: #003a1c;
+
+            padding: 0.65rem 1.4rem;
+
+            border-radius: 9999px;
+
+            font-weight: 900;
+
+            border: 2px solid #f1d477;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.3);
+
+            transition: all 0.3s;
+
+            cursor: pointer;
+
+            position: relative;
+            z-index: 1000;
+        }
+
+        .btn-reset:hover {
+            transform:
+                translateY(-2px)
+                scale(1.03);
+
+            box-shadow:
+                0 6px 20px rgba(212,175,55,0.5);
+        }
+
+
+        /* =====================================================
+           SCROLLBAR
+           ===================================================== */
+
+        ::-webkit-scrollbar {
+            width: 4px;
+            height: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background:
+                rgba(212,175,55,0.5);
+
+            border-radius: 10px;
+        }
+
+
+        /* =====================================================
            MOBILE
-        ========================================= */
+           ===================================================== */
 
-        @media (max-width: 650px) {
+        @media (max-width: 767px) {
 
-            .app {
-                grid-template-rows:
-                    8vh
-                    19vh
-                    1fr
-                    11vh;
+            body {
+                overflow: auto;
             }
 
-
-            .header {
-                padding:
-                    1vh
-                    3vw;
+            .app-wrapper {
+                min-height: 100vh;
+                height: auto;
+                overflow: visible;
             }
 
-
-            .teams {
-                gap:
-                    5px;
-            }
-
-
-            .team {
-                padding:
-                    4px;
-            }
-
-
-            .bingo-grid {
-                gap:
-                    3px;
-            }
-
-
-            .bingo-cell span {
-                font-size:
-                    5px;
-            }
-
-
-            .bingo-cell i {
-                font-size:
-                    8px;
-            }
-
-
-            .game-button {
-                min-width:
-                    0;
-
-                width:
-                    42vw;
-
-                padding:
-                    0 8px;
-            }
-
-
-            .element-card {
-                min-width:
-                    170px;
+            .bingo-cell {
+                border-radius: 8px;
             }
 
         }
@@ -1130,267 +466,561 @@
 </head>
 
 
-<body>
+<body class="antialiased">
 
 
-<div class="app">
+<div class="app-wrapper">
 
 
-    <!-- =========================================
-         HEADER
-    ========================================== -->
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
 
-    <header class="header">
+<header
+    class="w-full
+           px-5 md:px-8
+           py-2
+           flex items-center
+           justify-between
+           border-b
+           border-saudi-gold/20
+           bg-saudi-dark/90
+           backdrop-blur-md
+           shrink-0">
+
+    <!-- TITLE - RIGHT -->
+
+    <div
+        class="flex items-center
+               gap-2
+               order-1">
+
+        <span
+            class="w-2.5 h-2.5
+                   rounded-full
+                   bg-saudi-gold
+                   animate-pulse">
+        </span>
+
+        <h1
+            class="text-sm md:text-lg
+                   font-black
+                   tracking-wide
+                   text-white">
+
+            لعبة بنقو اليوم الوطني 96
+
+        </h1>
+
+    </div>
 
 
-        <!-- GAME TITLE - RIGHT -->
+    <!-- LOGO - LEFT -->
 
-        <div class="game-title">
+    <div
+        class="w-11 h-11
+               md:w-14 md:h-14
+               bg-white
+               rounded-full
+               p-0.5
+               shadow-[0_0_15px_rgba(212,175,55,0.4)]
+               border-2 border-saudi-gold
+               flex items-center
+               justify-center
+               overflow-hidden
+               order-2">
 
-            <span class="title-dot"></span>
+        <img
+            src="./74C4E3DD-B884-454B-B50B-6663DD3B846E.png"
+            alt="شعار نماء"
+            id="store-logo-img"
+            class="w-full h-full
+                   object-contain
+                   rounded-full
+                   bg-white">
 
-            <span>
-                لعبة بنقو اليوم الوطني 96
-            </span>
+    </div>
 
-        </div>
-
-
-        <!-- LOGO - LEFT -->
-
-        <div class="logo-container">
-
-            <img
-                src="./74C4E3DD-B884-454B-B50B-6663DD3B846E.png"
-                alt="شعار نماء"
-                id="store-logo-img"
-            >
-
-        </div>
-
-    </header>
-
-
-
-    <!-- =========================================
-         QUESTION
-    ========================================== -->
-
-    <section class="question-area">
+</header>
 
 
-        <div class="question-label">
+<!-- =========================================================
+     MAIN
+     ========================================================= -->
 
-            <i class="fa-solid fa-circle-question"></i>
+<main
+    class="w-full
+           max-w-[1800px]
+           mx-auto
+           px-3 md:px-5
+           py-2 md:py-3
+           flex flex-col
+           gap-2 md:gap-3
+           flex-1
+           min-h-0">
+
+
+<!-- =========================================================
+     QUESTION
+     ========================================================= -->
+
+<section
+    class="glass-panel
+           rounded-2xl
+           p-2.5 md:p-3
+           border-2
+           border-saudi-gold/40
+           shadow-2xl
+           shrink-0">
+
+
+    <div
+        class="relative
+               bg-black/25
+               rounded-xl
+               border
+               border-white/10
+               p-2.5 md:p-3">
+
+
+        <div
+            class="absolute
+                   -top-3
+                   right-4
+                   bg-saudi-gold
+                   text-saudi-dark
+                   px-3 py-1
+                   rounded-full
+                   text-[10px]
+                   md:text-xs
+                   font-black">
+
+            <i class="fa-solid fa-circle-question ml-1"></i>
 
             السؤال الثقافي
 
         </div>
 
 
-        <div class="question-box">
+        <p
+            id="question-text"
+            class="text-sm
+                   md:text-lg
+                   font-black
+                   text-gray-300
+                   text-center
+                   min-h-[38px]
+                   flex items-center
+                   justify-center
+                   leading-relaxed
+                   mt-1">
 
-            <p id="question-text">
+            اضغط على "سحب سؤال"
+            لبدء المسابقة...
 
-                اضغط على "سحب سؤال" لبدء المسابقة
+        </p>
 
-            </p>
-
-        </div>
+    </div>
 
 
-        <!-- ANSWER BUTTON -->
+    <!-- ANSWER -->
 
-        <button
-            id="btn-reveal"
-            onclick="revealAnswer()"
-            disabled
-            style="
-                border:none;
-                background:transparent;
-                color:#D4AF37;
-                font-family:Cairo;
-                font-weight:800;
-                font-size:10px;
-                cursor:pointer;
-            "
-        >
-
-            <i class="fa-solid fa-eye"></i>
-
-            إظهار الإجابة
-
-        </button>
+    <div class="relative mt-2">
 
 
         <div
-            id="answer-text"
-            style="
-                display:none;
-                font-size:11px;
-                font-weight:800;
-                text-align:center;
-                color:#D4AF37;
-            "
-        ></div>
+            class="absolute
+                   -top-2.5
+                   right-4
+                   bg-saudi-green
+                   text-white
+                   px-3 py-1
+                   rounded-full
+                   text-[10px]
+                   font-bold
+                   z-10
+                   border
+                   border-white/20">
 
-    </section>
+            <i class="fa-solid fa-check-double ml-1"></i>
+
+            الإجابة
+
+        </div>
 
 
+        <div
+            id="answer-box"
+            class="bg-white
+                   p-2.5
+                   rounded-xl
+                   border-2
+                   border-saudi-green
+                   shadow-md
+                   blur-sm
+                   opacity-50
+                   relative
+                   overflow-hidden">
 
-    <!-- =========================================
-         GAME AREA
-    ========================================== -->
 
-    <main class="game-area">
+            <p
+                id="answer-text"
+                class="text-xs
+                       md:text-sm
+                       font-black
+                       text-saudi-dark
+                       text-center
+                       min-h-[22px]">
+
+                ...
+
+            </p>
 
 
-        <!-- CURRENT ELEMENT -->
+            <button
+                id="btn-reveal"
+                onclick="revealAnswer()"
+                disabled
+                type="button"
+                class="absolute inset-0
+                       w-full h-full
+                       bg-saudi-light/90
+                       backdrop-blur-sm
+                       flex items-center
+                       justify-center
+                       font-bold
+                       text-saudi-green
+                       text-xs md:text-sm
+                       cursor-not-allowed
+                       z-[1000]
+                       pointer-events-auto">
 
-        <div class="element-area">
+                <i class="fa-solid fa-eye ml-1"></i>
+
+                اضغط لإظهار الإجابة
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     CURRENT ELEMENT
+     ========================================================= -->
+
+<section
+    class="flex
+           justify-center
+           shrink-0">
+
+
+    <div
+        class="glass-panel
+               rounded-2xl
+               p-2 md:p-3
+               flex flex-col
+               items-center
+               gap-1
+               w-32
+               md:w-40">
+
+
+        <span
+            class="text-[10px]
+                   text-saudi-gold
+                   font-black">
+
+            العنصر المسحوب
+
+        </span>
+
+
+        <div
+            id="current-card-display"
+            class="bg-white
+                   w-20 h-20
+                   md:w-28 md:h-28
+                   rounded-2xl
+                   flex flex-col
+                   items-center
+                   justify-center
+                   shadow-xl
+                   border-2
+                   border-saudi-gold
+                   text-center">
+
 
             <div
-                id="current-card-display"
-                class="element-card"
-            >
+                class="w-8 h-8
+                       md:w-10 md:h-10
+                       rounded-lg
+                       bg-saudi-light
+                       flex items-center
+                       justify-center
+                       mb-1.5">
 
-                <div
+                <i
                     id="card-icon"
-                    class="element-icon"
-                >
-
-                    <i class="fa-solid fa-dice"></i>
-
-                </div>
-
-
-                <div class="element-info">
-
-                    <span class="element-label">
-                        العنصر المسحوب
-                    </span>
-
-                    <span id="card-name">
-                        في الانتظار
-                    </span>
-
-                </div>
+                    class="fa-solid
+                           fa-box-open
+                           text-lg
+                           md:text-xl
+                           text-gray-400">
+                </i>
 
             </div>
 
-        </div>
 
+            <h3
+                id="card-name"
+                class="text-[10px]
+                       md:text-xs
+                       font-black
+                       text-gray-400
+                       px-1">
 
+                في انتظار السحب
 
-        <!-- TEAMS -->
-
-        <div class="teams">
-
-
-            <!-- TEAM 1 -->
-
-            <section class="team">
-
-
-                <div class="team-header">
-
-                    <input
-                        id="team1-name-input"
-                        class="team-name"
-                        value="فريق الأخضر"
-                        onchange="updateTeamName(1)"
-                    >
-
-
-                    <span
-                        id="team1-score"
-                        class="score"
-                    >
-                        1 / 25
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="team1-grid"
-                    class="bingo-grid"
-                ></div>
-
-            </section>
-
-
-
-            <!-- TEAM 2 -->
-
-            <section class="team">
-
-
-                <div class="team-header">
-
-                    <input
-                        id="team2-name-input"
-                        class="team-name"
-                        value="فريق المجد"
-                        onchange="updateTeamName(2)"
-                    >
-
-
-                    <span
-                        id="team2-score"
-                        class="score"
-                    >
-                        1 / 25
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="team2-grid"
-                    class="bingo-grid"
-                ></div>
-
-            </section>
+            </h3>
 
         </div>
 
-    </main>
+    </div>
+
+</section>
 
 
+<!-- =========================================================
+     BINGO BOARDS
+     ========================================================= -->
 
-    <!-- =========================================
-         BOTTOM BUTTONS
-    ========================================== -->
-
-    <footer class="bottom-area">
-
-
-        <button
-            id="btn-draw-question"
-            class="
-                game-button
-                question-button
-            "
-            onclick="drawNextQuestion()"
-        >
-
-            <i class="fa-solid fa-circle-question"></i>
-
-            سحب سؤال
-
-        </button>
+<section
+    class="grid
+           grid-cols-1
+           lg:grid-cols-2
+           gap-2 md:gap-4
+           w-full
+           flex-1
+           min-h-0">
 
 
+<!-- =========================================================
+     TEAM 1
+     ========================================================= -->
+
+<div
+    class="glass-panel
+           rounded-2xl
+           p-2 md:p-3
+           shadow-2xl
+           flex flex-col
+           min-h-0">
+
+
+    <div
+        class="flex items-center
+               justify-between
+               gap-2
+               mb-1.5
+               pb-1.5
+               border-b
+               border-saudi-gold/20
+               shrink-0">
+
+
+        <input
+            type="text"
+            id="team1-name-input"
+            value="فريق الأخضر"
+            onchange="updateTeamName(1)"
+            class="bg-transparent
+                   text-saudi-gold
+                   font-black
+                   text-sm md:text-lg
+                   border-b
+                   border-dashed
+                   border-saudi-gold/50
+                   focus:outline-none
+                   w-40 md:w-52
+                   px-1">
+
+
+        <span
+            id="team1-score"
+            class="bg-saudi-green
+                   text-white
+                   px-3 py-1
+                   rounded-full
+                   text-xs md:text-sm
+                   font-bold
+                   border
+                   border-saudi-gold/30
+                   shrink-0">
+
+            1 / 25
+
+        </span>
+
+    </div>
+
+
+    <p
+        class="text-[8px]
+               md:text-[10px]
+               text-gray-300
+               mb-1.5
+               text-center
+               shrink-0">
+
+        اضغط على المربع عند سحب العنصر
+
+    </p>
+
+
+    <div
+        id="team1-grid"
+        class="grid
+               grid-cols-5
+               gap-1.5 md:gap-2
+               w-full
+               flex-1
+               min-h-0">
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     TEAM 2
+     ========================================================= -->
+
+<div
+    class="glass-panel
+           rounded-2xl
+           p-2 md:p-3
+           shadow-2xl
+           flex flex-col
+           min-h-0">
+
+
+    <div
+        class="flex items-center
+               justify-between
+               gap-2
+               mb-1.5
+               pb-1.5
+               border-b
+               border-saudi-gold/20
+               shrink-0">
+
+
+        <input
+            type="text"
+            id="team2-name-input"
+            value="فريق المجد"
+            onchange="updateTeamName(2)"
+            class="bg-transparent
+                   text-saudi-gold
+                   font-black
+                   text-sm md:text-lg
+                   border-b
+                   border-dashed
+                   border-saudi-gold/50
+                   focus:outline-none
+                   w-40 md:w-52
+                   px-1">
+
+
+        <span
+            id="team2-score"
+            class="bg-saudi-green
+                   text-white
+                   px-3 py-1
+                   rounded-full
+                   text-xs md:text-sm
+                   font-bold
+                   border
+                   border-saudi-gold/30
+                   shrink-0">
+
+            1 / 25
+
+        </span>
+
+    </div>
+
+
+    <p
+        class="text-[8px]
+               md:text-[10px]
+               text-gray-300
+               mb-1.5
+               text-center
+               shrink-0">
+
+        اضغط على المربع عند سحب العنصر
+
+    </p>
+
+
+    <div
+        id="team2-grid"
+        class="grid
+               grid-cols-5
+               gap-1.5 md:gap-2
+               w-full
+               flex-1
+               min-h-0">
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+     BOTTOM BUTTONS
+     ========================================================= -->
+
+<section
+    class="glass-panel
+           rounded-2xl
+           p-2 md:p-3
+           shadow-2xl
+           shrink-0
+           relative
+           z-[100]">
+
+
+    <div
+        class="grid
+               grid-cols-1
+               md:grid-cols-2
+               gap-2
+               max-w-3xl
+               mx-auto
+               relative
+               z-[100]">
+
+
+        <!-- DRAW ELEMENT -->
 
         <button
             id="btn-draw-element"
-            class="
-                game-button
-                element-button
-            "
             onclick="drawNextElement()"
-        >
+            type="button"
+            class="btn-primary
+                   w-full
+                   flex items-center
+                   justify-center
+                   gap-2
+                   text-sm md:text-base">
 
             <i class="fa-solid fa-dice"></i>
 
@@ -1398,45 +1028,225 @@
 
         </button>
 
-    </footer>
+
+        <!-- DRAW QUESTION -->
+
+        <button
+            id="btn-draw-question"
+            onclick="drawNextQuestion()"
+            type="button"
+            class="btn-question
+                   w-full
+                   flex items-center
+                   justify-center
+                   gap-2
+                   text-sm md:text-base">
+
+            <i class="fa-solid fa-circle-question"></i>
+
+            سحب سؤال
+
+        </button>
+
+    </div>
+
+
+    <!-- HISTORIES -->
+
+    <div
+        class="grid
+               grid-cols-1
+               md:grid-cols-2
+               gap-2
+               mt-2
+               max-w-5xl
+               mx-auto">
+
+
+        <!-- ELEMENT HISTORY -->
+
+        <div
+            class="bg-black/20
+                   rounded-xl
+                   p-1.5
+                   border
+                   border-white/10">
+
+
+            <h3
+                class="text-[9px]
+                       font-black
+                       text-white
+                       mb-1">
+
+                <i class="fa-solid
+                          fa-clock-rotate-left
+                          text-saudi-gold ml-1">
+                </i>
+
+                العناصر المسحوبة
+
+            </h3>
+
+
+            <div
+                id="element-history"
+                class="flex flex-wrap
+                       gap-1
+                       max-h-10
+                       overflow-y-auto">
+
+                <span
+                    class="text-[8px]
+                           text-gray-400">
+
+                    لم يتم سحب أي عنصر
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION HISTORY -->
+
+        <div
+            class="bg-black/20
+                   rounded-xl
+                   p-1.5
+                   border
+                   border-white/10">
+
+
+            <h3
+                class="text-[9px]
+                       font-black
+                       text-white
+                       mb-1">
+
+                <i class="fa-solid
+                          fa-circle-question
+                          text-saudi-gold ml-1">
+                </i>
+
+                الأسئلة المسحوبة
+
+            </h3>
+
+
+            <div
+                id="question-history"
+                class="flex flex-wrap
+                       gap-1
+                       max-h-10
+                       overflow-y-auto">
+
+                <span
+                    class="text-[8px]
+                           text-gray-400">
+
+                    لم يتم سحب أي سؤال
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+
+<footer
+    class="w-full
+           text-center
+           py-1
+           text-[8px] md:text-[9px]
+           text-gray-400
+           border-t
+           border-saudi-gold/10
+           shrink-0">
+
+    Saudi National Day 96 Bingo By Namaa
+    - جميع الحقوق محفوظة
+
+</footer>
+
 
 </div>
 
 
-
-<!-- =========================================
+<!-- =========================================================
      WIN MODAL
-========================================== -->
+     ========================================================= -->
 
 <div
     id="win-modal"
-    class="modal"
->
+    class="fixed inset-0
+           bg-black/80
+           backdrop-blur-md
+           z-[9998]
+           hidden
+           flex items-center
+           justify-center
+           p-4">
 
-    <div class="modal-content">
+
+    <!-- CONFETTI -->
+
+    <div id="celebration"></div>
+
+
+    <!-- MODAL -->
+
+    <div
+        class="win-modal
+               p-6 md:p-8
+               rounded-3xl
+               max-w-md
+               w-full
+               text-center
+               shadow-2xl
+               flex flex-col
+               items-center
+               gap-4
+               relative
+               z-10">
+
 
         <div
-            style="
-                font-size:55px;
-                color:#D4AF37;
-                margin-bottom:10px;
-            "
-        >
+            class="w-20 h-20
+                   bg-saudi-gold
+                   rounded-full
+                   flex items-center
+                   justify-center
+                   shadow-lg
+                   animate-bounce
+                   celebration-pulse">
 
-            <i class="fa-solid fa-trophy"></i>
+            <i
+                class="fa-solid fa-trophy
+                       text-4xl
+                       text-saudi-dark">
+            </i>
 
         </div>
 
 
         <h2
             id="win-title"
-            style="
-                color:#D4AF37;
-                font-size:24px;
-                font-weight:900;
-                margin:0 0 10px;
-            "
-        >
+            class="text-2xl md:text-3xl
+                   font-black
+                   text-saudi-gold">
 
             مبروك الفوز!
 
@@ -1445,28 +1255,56 @@
 
         <p
             id="win-message"
-            style="
-                color:white;
-                font-size:14px;
-                font-weight:700;
-                margin-bottom:20px;
-            "
-        >
+            class="text-sm md:text-base
+                   text-gray-200
+                   font-bold">
 
-            استطاع الفريق إكمال خط مستقيم!
+            استطاع الفريق إكمال خط مستقيم بنجاح
+            ودام عزك يا وطن!
 
         </p>
 
 
-        <button
-            onclick="closeWinModal()"
-            class="game-button element-button"
-            style="margin:auto;"
-        >
+        <div
+            class="flex flex-col
+                   sm:flex-row
+                   gap-3
+                   justify-center
+                   w-full">
 
-            استمرار اللعب
 
-        </button>
+            <!-- CONTINUE -->
+
+            <button
+                onclick="closeWinModal()"
+                type="button"
+                class="btn-primary
+                       text-base
+                       py-2.5
+                       px-8">
+
+                استمرار اللعب
+
+            </button>
+
+
+            <!-- RESET -->
+
+            <button
+                onclick="resetGame()"
+                type="button"
+                class="btn-reset
+                       text-base
+                       py-2.5
+                       px-8">
+
+                <i class="fa-solid fa-rotate-right ml-1"></i>
+
+                إعادة اللعبة
+
+            </button>
+
+        </div>
 
     </div>
 
@@ -1474,276 +1312,382 @@
 
 
 
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
 <script>
 
 
-/* =====================================================
+/* ============================================================
    BINGO ELEMENTS
-===================================================== */
+   ============================================================ */
 
 const RAW_BINGO_ELEMENTS = [
 
+    { id: 'b1',  name: 'العلا',          icon: 'fa-mountain-sun' },
+    { id: 'b2',  name: 'الخيل',          icon: 'fa-horse-head' },
+    { id: 'b3',  name: 'السيف',          icon: 'fa-khanda' },
+    { id: 'b4',  name: 'النخلة',         icon: 'fa-tree' },
+    { id: 'b5',  name: 'الرياض',         icon: 'fa-city' },
+    { id: 'b6',  name: 'العلم',           icon: 'fa-flag' },
+    { id: 'b7',  name: 'القهوة',         icon: 'fa-mug-hot' },
+    { id: 'b8',  name: 'التراث',         icon: 'fa-landmark' },
+    { id: 'b9',  name: 'الخيمة',         icon: 'fa-campground' },
+    { id: 'b10', name: 'الصقر',          icon: 'fa-feather-pointed' },
+    { id: 'b11', name: 'الدلة',          icon: 'fa-fire-burner' },
+    { id: 'b12', name: 'الفنجال',        icon: 'fa-mug-saucer' },
+    { id: 'b13', name: 'الأخضر',         icon: 'fa-palette' },
+    { id: 'b14', name: 'الصحراء',        icon: 'fa-sun' },
+    { id: 'b15', name: 'المصمك',         icon: 'fa-chess-rook' },
+    { id: 'b16', name: 'التمر',          icon: 'fa-bowl-food' },
+    { id: 'b17', name: 'اليوم الوطني',   icon: 'fa-calendar-day' },
+    { id: 'b18', name: 'جدة',            icon: 'fa-water' },
+    { id: 'b19', name: 'المسجد',         icon: 'fa-mosque' },
+    { id: 'b20', name: 'الكثبان',        icon: 'fa-wind' },
+    { id: 'b21', name: 'الفخار',         icon: 'fa-jar' },
+    { id: 'b22', name: 'السدو',          icon: 'fa-rug' },
+    { id: 'b23', name: 'العرضة',         icon: 'fa-people-group' },
+    { id: 'b24', name: 'الجمل',          icon: 'fa-paw' }
+
+];
+
+
+/* ============================================================
+   FULL BOARD
+   ============================================================ */
+
+function getFullBoardElements() {
+
+    const list = [...RAW_BINGO_ELEMENTS];
+
+    list.splice(
+        12,
+        0,
+        {
+            id: 'free',
+            name: 'FREE',
+            icon: 'fa-star',
+            isFree: true
+        }
+    );
+
+    return list;
+}
+
+
+/* ============================================================
+   QUESTIONS - 50
+   ============================================================ */
+
+const QUESTIONS_BANK = [
+
     {
-        id: 'b1',
-        name: 'العلا',
-        icon: 'fa-mountain-sun'
+        id: 1,
+        q: "متى توحّدت المملكة العربية السعودية؟",
+        a: "23 سبتمبر 1932م."
     },
 
     {
-        id: 'b2',
-        name: 'الخيل',
-        icon: 'fa-horse-head'
+        id: 2,
+        q: "من هو مؤسس المملكة العربية السعودية؟",
+        a: "الملك عبدالعزيز بن عبدالرحمن آل سعود."
     },
 
     {
-        id: 'b3',
-        name: 'السيف',
-        icon: 'fa-khanda'
+        id: 3,
+        q: "ما اسم الدولة قبل توحيدها؟",
+        a: "مملكة الحجاز ونجد وملحقاتها."
     },
 
     {
-        id: 'b4',
-        name: 'النخلة',
-        icon: 'fa-tree'
+        id: 4,
+        q: "كم سنة استغرق توحيد المملكة؟",
+        a: "32 سنة تقريبًا."
     },
 
     {
-        id: 'b5',
-        name: 'الرياض',
-        icon: 'fa-city'
+        id: 5,
+        q: "ما المدينة التي استعادها الملك عبدالعزيز وكانت نقطة انطلاق التوحيد؟",
+        a: "الرياض."
     },
 
     {
-        id: 'b6',
-        name: 'العلم',
-        icon: 'fa-flag'
+        id: 6,
+        q: "ما اسم أول ملك للمملكة العربية السعودية؟",
+        a: "الملك عبدالعزيز."
     },
 
     {
-        id: 'b7',
-        name: 'القهوة',
-        icon: 'fa-mug-hot'
+        id: 7,
+        q: "متى صدر مرسوم توحيد المملكة؟",
+        a: "17 جمادى الأولى 1351هـ."
     },
 
     {
-        id: 'b8',
-        name: 'التراث',
-        icon: 'fa-landmark'
+        id: 8,
+        q: "ما المناسبة التي نحتفل بها في 23 سبتمبر؟",
+        a: "اليوم الوطني السعودي."
     },
 
     {
-        id: 'b9',
-        name: 'الخيمة',
-        icon: 'fa-campground'
+        id: 9,
+        q: "ما الفرق بين اليوم الوطني ويوم التأسيس؟",
+        a: "اليوم الوطني ذكرى توحيد المملكة عام 1932م، ويوم التأسيس ذكرى تأسيس الدولة السعودية الأولى عام 1727م."
     },
 
     {
-        id: 'b10',
-        name: 'الصقر',
-        icon: 'fa-feather-pointed'
+        id: 10,
+        q: "من هو أول ولي عهد في المملكة العربية السعودية؟",
+        a: "الأمير سعود بن عبدالعزيز آل سعود."
     },
 
     {
-        id: 'b11',
-        name: 'الدلة',
-        icon: 'fa-fire-burner'
+        id: 11,
+        q: "ما عاصمة المملكة العربية السعودية؟",
+        a: "الرياض."
     },
 
     {
-        id: 'b12',
-        name: 'الفنجال',
-        icon: 'fa-mug-saucer'
+        id: 12,
+        q: "كم عدد مناطق المملكة الإدارية؟",
+        a: "13 منطقة."
     },
 
     {
-        id: 'b13',
-        name: 'الأخضر',
-        icon: 'fa-palette'
+        id: 13,
+        q: "ما أكبر منطقة إدارية في السعودية من حيث المساحة؟",
+        a: "المنطقة الشرقية."
     },
 
     {
-        id: 'b14',
-        name: 'الصحراء',
-        icon: 'fa-sun'
+        id: 14,
+        q: "ما أعلى قمة جبلية في السعودية؟",
+        a: "جبل السودة."
     },
 
     {
-        id: 'b15',
-        name: 'المصمك',
-        icon: 'fa-chess-rook'
+        id: 15,
+        q: "ما البحر الذي تطل عليه مدينة جدة؟",
+        a: "البحر الأحمر."
     },
 
     {
-        id: 'b16',
-        name: 'التمر',
-        icon: 'fa-bowl-food'
+        id: 16,
+        q: "ما اسم العملة السعودية؟",
+        a: "الريال السعودي."
     },
 
     {
-        id: 'b17',
-        name: 'اليوم الوطني',
-        icon: 'fa-calendar-day'
+        id: 17,
+        q: "ما اسم النشيد الوطني السعودي؟",
+        a: "سارعي للمجد والعلياء."
     },
 
     {
-        id: 'b18',
-        name: 'جدة',
-        icon: 'fa-water'
+        id: 18,
+        q: "ما رمزا شعار المملكة العربية السعودية؟",
+        a: "سيفان متقاطعان ونخلة."
     },
 
     {
-        id: 'b19',
-        name: 'المسجد',
-        icon: 'fa-mosque'
+        id: 19,
+        q: "ما أشهر مدينة سعودية تشتهر بالنخيل والتمور؟",
+        a: "الأحساء."
     },
 
     {
-        id: 'b20',
-        name: 'الكثبان',
-        icon: 'fa-wind'
+        id: 20,
+        q: "ما اسم المشروع السياحي الشهير في شمال غرب السعودية؟",
+        a: "مشروع نيوم."
     },
 
     {
-        id: 'b21',
-        name: 'الفخار',
-        icon: 'fa-jar'
+        id: 21,
+        q: "متى أُطلقت رؤية السعودية 2030؟",
+        a: "عام 2016م."
     },
 
     {
-        id: 'b22',
-        name: 'السدو',
-        icon: 'fa-rug'
+        id: 22,
+        q: "من صاحب فكرة رؤية السعودية 2030؟",
+        a: "الأمير محمد بن سلمان."
     },
 
     {
-        id: 'b23',
-        name: 'العرضة',
-        icon: 'fa-people-group'
+        id: 23,
+        q: "ما الهدف الأساسي من رؤية السعودية 2030؟",
+        a: "تنويع الاقتصاد وتقليل الاعتماد على النفط."
     },
 
     {
-        id: 'b24',
-        name: 'الجمل',
-        icon: 'fa-paw'
+        id: 24,
+        q: "ما اسم المشروع السياحي العالمي في منطقة العلا؟",
+        a: "مشروع تطوير العلا."
+    },
+
+    {
+        id: 25,
+        q: "ما المشروع الذي يهدف إلى تطوير مدينة مستقبلية على ساحل البحر الأحمر؟",
+        a: "نيوم."
+    },
+
+    {
+        id: 26,
+        q: "ما اسم المدينة الترفيهية الكبرى التي يجري تطويرها في الرياض؟",
+        a: "القدية."
+    },
+
+    {
+        id: 27,
+        q: "ما أبرز القطاعات التي تستهدف رؤية 2030 تطويرها؟",
+        a: "السياحة، التقنية، الصناعة، الترفيه، والطاقة المتجددة."
+    },
+
+    {
+        id: 28,
+        q: "ما الهدف من تطوير السياحة في السعودية؟",
+        a: "تنويع الاقتصاد وجذب الزوار والاستثمارات."
+    },
+
+    {
+        id: 29,
+        q: "ما اسم المشروع الذي يهدف إلى تطوير السياحة الفاخرة على ساحل البحر الأحمر؟",
+        a: "مشروع البحر الأحمر."
+    },
+
+    {
+        id: 30,
+        q: "ما اسم برنامج التحول الوطني؟",
+        a: "برنامج التحول الوطني، وهو أحد برامج تحقيق رؤية 2030."
+    },
+
+    {
+        id: 31,
+        q: "اليوم الوطني السعودي يصادف 23 سبتمبر.",
+        a: "صح."
+    },
+
+    {
+        id: 32,
+        q: "تأسست المملكة العربية السعودية عام 1932م.",
+        a: "صح."
+    },
+
+    {
+        id: 33,
+        q: "الملك عبدالعزيز هو مؤسس المملكة العربية السعودية.",
+        a: "صح."
+    },
+
+    {
+        id: 34,
+        q: "عاصمة السعودية هي جدة.",
+        a: "خطأ، العاصمة الرياض."
+    },
+
+    {
+        id: 35,
+        q: "رؤية السعودية 2030 أُطلقت عام 2016م.",
+        a: "صح."
+    },
+
+    {
+        id: 36,
+        q: "شعار المملكة العربية السعودية نخلة وسيفان.",
+        a: "صح."
+    },
+
+    {
+        id: 37,
+        q: "يوم التأسيس هو ذكرى توحيد المملكة عام 1932م.",
+        a: "خطأ، يوم التأسيس ذكرى تأسيس الدولة السعودية الأولى عام 1727م."
+    },
+
+    {
+        id: 38,
+        q: "تقع مدينة الرياض في المنطقة الشرقية.",
+        a: "خطأ، تقع في منطقة الرياض."
+    },
+
+    {
+        id: 39,
+        q: "السعودية تطل على البحر الأحمر والخليج العربي.",
+        a: "صح."
+    },
+
+    {
+        id: 40,
+        q: "مشروع نيوم يقع في جنوب السعودية.",
+        a: "خطأ، يقع في شمال غرب السعودية."
+    },
+
+    {
+        id: 41,
+        q: "ماذا يعني لك اليوم الوطني السعودي؟",
+        a: "مناسبة أفتخر فيها بوحدة الوطن وتاريخه وإنجازاته."
+    },
+
+    {
+        id: 42,
+        q: "ما أكثر إنجاز سعودي تفخر به؟",
+        a: "توحيد المملكة وتطورها في مختلف المجالات."
+    },
+
+    {
+        id: 43,
+        q: "كيف يمكن للمواطن المساهمة في تحقيق رؤية 2030؟",
+        a: "بالعمل والإتقان والتعلم والمشاركة في تنمية الوطن."
+    },
+
+    {
+        id: 44,
+        q: "ما أهم قيمة نتعلمها من تاريخ توحيد المملكة؟",
+        a: "الوحدة والعزيمة والتعاون."
+    },
+
+    {
+        id: 45,
+        q: "كيف تغيّرت السعودية خلال السنوات الأخيرة؟",
+        a: "شهدت تطورًا في الاقتصاد والتقنية والسياحة والخدمات."
+    },
+
+    {
+        id: 46,
+        q: "ما واجبنا تجاه وطننا؟",
+        a: "المحافظة على أمنه وممتلكاته والالتزام بالأنظمة."
+    },
+
+    {
+        id: 47,
+        q: "ما الرسالة التي توجهها للأجيال القادمة؟",
+        a: "حافظوا على وطنكم وواصلوا مسيرة البناء والتقدم."
+    },
+
+    {
+        id: 48,
+        q: "كيف نحافظ على الهوية الوطنية مع الانفتاح على العالم؟",
+        a: "بالتمسك بالقيم والتراث والاستفادة من التطور العالمي."
+    },
+
+    {
+        id: 49,
+        q: "ما الذي يجعل اليوم الوطني مناسبة مميزة؟",
+        a: "أنه يجمع الناس للاحتفال بتاريخ الوطن وإنجازاته."
+    },
+
+    {
+        id: 50,
+        q: "لو طلب منك إلقاء كلمة عن الوطن، ماذا تقول؟",
+        a: "وطني السعودية، فخرنا ومجدنا، نسأل الله أن يديم عليه الأمن والعز والرخاء."
     }
 
 ];
 
 
-
-/* =====================================================
-   QUESTIONS
-===================================================== */
-
-const QUESTIONS_BANK = [
-
-    { id:1, q:"متى توحّدت المملكة العربية السعودية؟", a:"23 سبتمبر 1932م." },
-
-    { id:2, q:"من هو مؤسس المملكة العربية السعودية؟", a:"الملك عبدالعزيز بن عبدالرحمن آل سعود." },
-
-    { id:3, q:"ما اسم الدولة قبل توحيدها؟", a:"مملكة الحجاز ونجد وملحقاتها." },
-
-    { id:4, q:"كم سنة استغرق توحيد المملكة؟", a:"32 سنة تقريبًا." },
-
-    { id:5, q:"ما المدينة التي استعادها الملك عبدالعزيز وكانت نقطة انطلاق التوحيد؟", a:"الرياض." },
-
-    { id:6, q:"ما اسم أول ملك للمملكة العربية السعودية؟", a:"الملك عبدالعزيز." },
-
-    { id:7, q:"متى صدر مرسوم توحيد المملكة؟", a:"17 جمادى الأولى 1351هـ." },
-
-    { id:8, q:"ما المناسبة التي نحتفل بها في 23 سبتمبر؟", a:"اليوم الوطني السعودي." },
-
-    { id:9, q:"ما الفرق بين اليوم الوطني ويوم التأسيس؟", a:"اليوم الوطني ذكرى توحيد المملكة عام 1932م، ويوم التأسيس ذكرى تأسيس الدولة السعودية الأولى عام 1727م." },
-
-    { id:10, q:"من هو أول ولي عهد في المملكة العربية السعودية؟", a:"الأمير سعود بن عبدالعزيز آل سعود." },
-
-    { id:11, q:"ما عاصمة المملكة العربية السعودية؟", a:"الرياض." },
-
-    { id:12, q:"كم عدد مناطق المملكة الإدارية؟", a:"13 منطقة." },
-
-    { id:13, q:"ما أكبر منطقة إدارية في السعودية من حيث المساحة؟", a:"المنطقة الشرقية." },
-
-    { id:14, q:"ما أعلى قمة جبلية في السعودية؟", a:"جبل السودة." },
-
-    { id:15, q:"ما البحر الذي تطل عليه مدينة جدة؟", a:"البحر الأحمر." },
-
-    { id:16, q:"ما اسم العملة السعودية؟", a:"الريال السعودي." },
-
-    { id:17, q:"ما اسم النشيد الوطني السعودي؟", a:"سارعي للمجد والعلياء." },
-
-    { id:18, q:"ما رمزا شعار المملكة العربية السعودية؟", a:"سيفان متقاطعان ونخلة." },
-
-    { id:19, q:"ما أشهر مدينة سعودية تشتهر بالنخيل والتمور؟", a:"الأحساء." },
-
-    { id:20, q:"ما اسم المشروع السياحي الشهير في شمال غرب السعودية؟", a:"مشروع نيوم." },
-
-    { id:21, q:"متى أُطلقت رؤية السعودية 2030؟", a:"عام 2016م." },
-
-    { id:22, q:"من صاحب فكرة رؤية السعودية 2030؟", a:"الأمير محمد بن سلمان." },
-
-    { id:23, q:"ما الهدف الأساسي من رؤية السعودية 2030؟", a:"تنويع الاقتصاد وتقليل الاعتماد على النفط." },
-
-    { id:24, q:"ما اسم المشروع السياحي العالمي في منطقة العلا؟", a:"مشروع تطوير العلا." },
-
-    { id:25, q:"ما المشروع الذي يهدف إلى تطوير مدينة مستقبلية على ساحل البحر الأحمر؟", a:"نيوم." },
-
-    { id:26, q:"ما اسم المدينة الترفيهية الكبرى التي يجري تطويرها في الرياض؟", a:"القدية." },
-
-    { id:27, q:"ما أبرز القطاعات التي تستهدف رؤية 2030 تطويرها؟", a:"السياحة، التقنية، الصناعة، الترفيه، والطاقة المتجددة." },
-
-    { id:28, q:"ما الهدف من تطوير السياحة في السعودية؟", a:"تنويع الاقتصاد وجذب الزوار والاستثمارات." },
-
-    { id:29, q:"ما اسم المشروع الذي يهدف إلى تطوير السياحة الفاخرة على ساحل البحر الأحمر؟", a:"مشروع البحر الأحمر." },
-
-    { id:30, q:"ما اسم برنامج التحول الوطني؟", a:"برنامج التحول الوطني، وهو أحد برامج تحقيق رؤية 2030." },
-
-    { id:31, q:"اليوم الوطني السعودي يصادف 23 سبتمبر.", a:"صح." },
-
-    { id:32, q:"تأسست المملكة العربية السعودية عام 1932م.", a:"صح." },
-
-    { id:33, q:"الملك عبدالعزيز هو مؤسس المملكة العربية السعودية.", a:"صح." },
-
-    { id:34, q:"عاصمة السعودية هي جدة.", a:"خطأ، العاصمة الرياض." },
-
-    { id:35, q:"رؤية السعودية 2030 أُطلقت عام 2016م.", a:"صح." },
-
-    { id:36, q:"شعار المملكة العربية السعودية نخلة وسيفان.", a:"صح." },
-
-    { id:37, q:"يوم التأسيس هو ذكرى توحيد المملكة عام 1932م.", a:"خطأ، يوم التأسيس ذكرى تأسيس الدولة السعودية الأولى عام 1727م." },
-
-    { id:38, q:"تقع مدينة الرياض في المنطقة الشرقية.", a:"خطأ، تقع في منطقة الرياض." },
-
-    { id:39, q:"السعودية تطل على البحر الأحمر والخليج العربي.", a:"صح." },
-
-    { id:40, q:"مشروع نيوم يقع في جنوب السعودية.", a:"خطأ، يقع في شمال غرب السعودية." },
-
-    { id:41, q:"ماذا يعني لك اليوم الوطني السعودي؟", a:"مناسبة أفتخر فيها بوحدة الوطن وتاريخه وإنجازاته." },
-
-    { id:42, q:"ما أكثر إنجاز سعودي تفخر به؟", a:"توحيد المملكة وتطورها في مختلف المجالات." },
-
-    { id:43, q:"كيف يمكن للمواطن المساهمة في تحقيق رؤية 2030؟", a:"بالعمل والإتقان والتعلم والمشاركة في تنمية الوطن." },
-
-    { id:44, q:"ما أهم قيمة نتعلمها من تاريخ توحيد المملكة؟", a:"الوحدة والعزيمة والتعاون." },
-
-    { id:45, q:"كيف تغيّرت السعودية خلال السنوات الأخيرة؟", a:"شهدت تطورًا في الاقتصاد والتقنية والسياحة والخدمات." },
-
-    { id:46, q:"ما واجبنا تجاه وطننا؟", a:"المحافظة على أمنه وممتلكاته والالتزام بالأنظمة." },
-
-    { id:47, q:"ما الرسالة التي توجهها للأجيال القادمة؟", a:"حافظوا على وطنكم وواصلوا مسيرة البناء والتقدم." },
-
-    { id:48, q:"كيف نحافظ على الهوية الوطنية مع الانفتاح على العالم؟", a:"بالتمسك بالقيم والتراث والاستفادة من التطور العالمي." },
-
-    { id:49, q:"ما الذي يجعل اليوم الوطني مناسبة مميزة؟", a:"أنه يجمع الناس للاحتفال بتاريخ الوطن وإنجازاته." },
-
-    { id:50, q:"لو طلب منك إلقاء كلمة عن الوطن، ماذا تقول؟", a:"وطني السعودية، فخرنا ومجدنا، نسأل الله أن يديم عليه الأمن والعز والرخاء." }
-
-];
-
-
-
-/* =====================================================
-   STATE
-===================================================== */
+/* ============================================================
+   GAME STATE
+   ============================================================ */
 
 const gameState = {
 
@@ -1767,257 +1711,247 @@ const gameState = {
         free: true
     },
 
-    team1Won: false,
+    hasTeam1Won: false,
 
-    team2Won: false
+    hasTeam2Won: false
 
 };
 
 
-
-/* =====================================================
-   BOARD
-===================================================== */
-
-function getBoard() {
-
-    const board = [
-        ...RAW_BINGO_ELEMENTS
-    ];
-
-    board.splice(
-        12,
-        0,
-        {
-            id: 'free',
-            name: 'FREE',
-            icon: 'fa-star',
-            isFree: true
-        }
-    );
-
-    return board;
-}
-
-
-
-/* =====================================================
+/* ============================================================
    TEAM NAME
-===================================================== */
+   ============================================================ */
 
-function updateTeamName(team) {
+function updateTeamName(teamNum) {
 
-    if (team === 1) {
+    if (teamNum === 1) {
 
-        const value =
-            document
-            .getElementById(
+        const input =
+            document.getElementById(
                 'team1-name-input'
-            )
-            .value
-            .trim();
+            );
 
         gameState.team1Name =
-            value ||
+            input.value.trim() ||
             'فريق الأخضر';
 
-    }
+        input.value =
+            gameState.team1Name;
 
-    else {
+    } else {
 
-        const value =
-            document
-            .getElementById(
+        const input =
+            document.getElementById(
                 'team2-name-input'
-            )
-            .value
-            .trim();
+            );
 
         gameState.team2Name =
-            value ||
+            input.value.trim() ||
             'فريق المجد';
+
+        input.value =
+            gameState.team2Name;
 
     }
 
 }
 
 
-
-/* =====================================================
-   RENDER
-===================================================== */
+/* ============================================================
+   RENDER BOARDS
+   ============================================================ */
 
 function renderTeamBoards() {
 
-    renderTeam(
-        1,
-        'team1-grid',
-        gameState.team1Checked
-    );
-
-    renderTeam(
-        2,
-        'team2-grid',
-        gameState.team2Checked
-    );
-
-
-    updateScores();
-
-    checkWins();
-
-}
-
-
-
-/* =====================================================
-   RENDER TEAM
-===================================================== */
-
-function renderTeam(
-    teamNumber,
-    gridId,
-    checkedMap
-) {
-
-    const grid =
+    const grid1 =
         document.getElementById(
-            gridId
+            'team1-grid'
         );
 
-    grid.innerHTML = '';
+    const grid2 =
+        document.getElementById(
+            'team2-grid'
+        );
 
 
-    getBoard().forEach(
-        element => {
+    grid1.innerHTML = '';
 
-            const checked =
-                !!checkedMap[
-                    element.id
-                ];
+    grid2.innerHTML = '';
 
 
-            const cell =
-                document.createElement(
-                    'div'
+    const board =
+        getFullBoardElements();
+
+
+    board.forEach(el => {
+
+
+        /* ====================================================
+           TEAM 1
+           ==================================================== */
+
+        const checked1 =
+            !!gameState.team1Checked[el.id];
+
+
+        const cell1 =
+            document.createElement('div');
+
+
+        cell1.className =
+            `bingo-cell border
+            ${
+                el.isFree
+                ?
+                'is-free bg-white/35 border-saudi-gold text-saudi-gold shadow-md'
+                :
+                checked1
+                ?
+                'bg-white/35 border-white text-white shadow-lg backdrop-blur-sm scale-[0.98]'
+                :
+                'bg-black/25 border-white/10 text-gray-300 hover:bg-black/40'
+            }`;
+
+
+        if (!el.isFree) {
+
+            cell1.onclick = function () {
+
+                toggleTeamCell(
+                    1,
+                    el.id
                 );
 
-
-            cell.className =
-                'bingo-cell';
-
-
-            if (element.isFree) {
-
-                cell.classList.add(
-                    'free'
-                );
-
-            }
-
-            else if (checked) {
-
-                cell.classList.add(
-                    'checked'
-                );
-
-            }
-
-
-            cell.innerHTML = `
-
-                <i class="
-                    fa-solid
-                    ${element.icon}
-                "></i>
-
-                <span>
-                    ${element.name}
-                </span>
-
-            `;
-
-
-            if (
-                !element.isFree
-            ) {
-
-                cell.addEventListener(
-                    'click',
-                    () => {
-
-                        toggleCell(
-                            teamNumber,
-                            element.id
-                        );
-
-                    }
-                );
-
-            }
-
-
-            grid.appendChild(
-                cell
-            );
+            };
 
         }
-    );
-
-}
 
 
+        cell1.innerHTML = `
 
-/* =====================================================
-   TOGGLE
-===================================================== */
+            <i
+                class="fa-solid
+                       ${el.icon}
+                       text-sm
+                       md:text-lg
+                       mb-0.5
+                       ${
+                           checked1 || el.isFree
+                           ?
+                           'text-white'
+                           :
+                           'text-saudi-gold'
+                       }">
+            </i>
 
-function toggleCell(
-    team,
-    id
-) {
+            <span
+                class="text-[8px]
+                       md:text-[11px]
+                       font-bold
+                       leading-tight
+                       px-0.5">
 
-    if (team === 1) {
+                ${el.name}
 
-        gameState.team1Checked[id] =
-            !gameState.team1Checked[id];
+            </span>
 
-    }
-
-    else {
-
-        gameState.team2Checked[id] =
-            !gameState.team2Checked[id];
-
-    }
+        `;
 
 
-    renderTeamBoards();
-
-}
+        grid1.appendChild(cell1);
 
 
+        /* ====================================================
+           TEAM 2
+           ==================================================== */
 
-/* =====================================================
-   SCORES
-===================================================== */
+        const checked2 =
+            !!gameState.team2Checked[el.id];
 
-function updateScores() {
+
+        const cell2 =
+            document.createElement('div');
+
+
+        cell2.className =
+            `bingo-cell border
+            ${
+                el.isFree
+                ?
+                'is-free bg-white/35 border-saudi-gold text-saudi-gold shadow-md'
+                :
+                checked2
+                ?
+                'bg-white/35 border-white text-white shadow-lg backdrop-blur-sm scale-[0.98]'
+                :
+                'bg-black/25 border-white/10 text-gray-300 hover:bg-black/40'
+            }`;
+
+
+        if (!el.isFree) {
+
+            cell2.onclick = function () {
+
+                toggleTeamCell(
+                    2,
+                    el.id
+                );
+
+            };
+
+        }
+
+
+        cell2.innerHTML = `
+
+            <i
+                class="fa-solid
+                       ${el.icon}
+                       text-sm
+                       md:text-lg
+                       mb-0.5
+                       ${
+                           checked2 || el.isFree
+                           ?
+                           'text-white'
+                           :
+                           'text-saudi-gold'
+                       }">
+            </i>
+
+            <span
+                class="text-[8px]
+                       md:text-[11px]
+                       font-bold
+                       leading-tight
+                       px-0.5">
+
+                ${el.name}
+
+            </span>
+
+        `;
+
+
+        grid2.appendChild(cell2);
+
+    });
+
+
+    /* ========================================================
+       SCORES
+       ======================================================== */
 
     const score1 =
         Object.values(
             gameState.team1Checked
-        )
-        .filter(Boolean)
-        .length;
+        ).filter(Boolean).length;
 
 
     const score2 =
         Object.values(
             gameState.team2Checked
-        )
-        .filter(Boolean)
-        .length;
+        ).filter(Boolean).length;
 
 
     document.getElementById(
@@ -2031,44 +1965,141 @@ function updateScores() {
     ).innerText =
         `${score2} / 25`;
 
+
+    checkWinConditions();
+
 }
 
 
+/* ============================================================
+   TOGGLE CELL
+   ============================================================ */
 
-/* =====================================================
-   WIN CHECK
-===================================================== */
+function toggleTeamCell(
+    teamNum,
+    elementId
+) {
 
-function checkWins() {
+    if (elementId === 'free') {
+        return;
+    }
+
+
+    /* لا يسمح بتغيير اللوحة بعد فوز الفريق */
 
     if (
-        !gameState.team1Won &&
-        checkBoard(
-            gameState.team1Checked
-        )
+        teamNum === 1 &&
+        gameState.hasTeam1Won
     ) {
+        return;
+    }
 
-        gameState.team1Won =
-            true;
 
-        showWin(
-            gameState.team1Name
-        );
+    if (
+        teamNum === 2 &&
+        gameState.hasTeam2Won
+    ) {
+        return;
+    }
+
+
+    if (teamNum === 1) {
+
+        gameState.team1Checked[elementId] =
+            !gameState.team1Checked[elementId];
+
+    } else {
+
+        gameState.team2Checked[elementId] =
+            !gameState.team2Checked[elementId];
+
+    }
+
+
+    renderTeamBoards();
+
+}
+
+
+/* ============================================================
+   WIN CHECK
+   ============================================================ */
+
+function checkWinConditions() {
+
+    const board =
+        getFullBoardElements();
+
+
+    const matrix1 = [];
+
+    const matrix2 = [];
+
+
+    for (let r = 0; r < 5; r++) {
+
+        const row1 = [];
+
+        const row2 = [];
+
+
+        for (let c = 0; c < 5; c++) {
+
+            const el =
+                board[r * 5 + c];
+
+
+            row1.push(
+                el.isFree
+                ?
+                true
+                :
+                !!gameState.team1Checked[el.id]
+            );
+
+
+            row2.push(
+                el.isFree
+                ?
+                true
+                :
+                !!gameState.team2Checked[el.id]
+            );
+
+        }
+
+
+        matrix1.push(row1);
+
+        matrix2.push(row2);
 
     }
 
 
     if (
-        !gameState.team2Won &&
-        checkBoard(
-            gameState.team2Checked
-        )
+        !gameState.hasTeam1Won &&
+        hasCompletedLine(matrix1)
     ) {
 
-        gameState.team2Won =
-            true;
+        gameState.hasTeam1Won = true;
 
-        showWin(
+        showWinModal(
+            gameState.team1Name
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !gameState.hasTeam2Won &&
+        hasCompletedLine(matrix2)
+    ) {
+
+        gameState.hasTeam2Won = true;
+
+        showWinModal(
             gameState.team2Name
         );
 
@@ -2077,71 +2108,20 @@ function checkWins() {
 }
 
 
+/* ============================================================
+   LINE CHECK
+   ============================================================ */
 
-/* =====================================================
-   CHECK BOARD
-===================================================== */
-
-function checkBoard(
-    checked
-) {
-
-    const board =
-        getBoard();
-
-
-    const matrix = [];
-
-
-    for (
-        let r = 0;
-        r < 5;
-        r++
-    ) {
-
-        const row = [];
-
-
-        for (
-            let c = 0;
-            c < 5;
-            c++
-        ) {
-
-            const element =
-                board[
-                    r * 5 + c
-                ];
-
-
-            row.push(
-                element.isFree ||
-                !!checked[
-                    element.id
-                ]
-            );
-
-        }
-
-
-        matrix.push(
-            row
-        );
-
-    }
+function hasCompletedLine(matrix) {
 
 
     /* ROWS */
 
-    for (
-        let r = 0;
-        r < 5;
-        r++
-    ) {
+    for (let r = 0; r < 5; r++) {
 
         if (
             matrix[r].every(
-                Boolean
+                value => value
             )
         ) {
 
@@ -2154,28 +2134,16 @@ function checkBoard(
 
     /* COLUMNS */
 
-    for (
-        let c = 0;
-        c < 5;
-        c++
-    ) {
+    for (let c = 0; c < 5; c++) {
 
-        let complete =
-            true;
+        let win = true;
 
 
-        for (
-            let r = 0;
-            r < 5;
-            r++
-        ) {
+        for (let r = 0; r < 5; r++) {
 
-            if (
-                !matrix[r][c]
-            ) {
+            if (!matrix[r][c]) {
 
-                complete =
-                    false;
+                win = false;
 
                 break;
 
@@ -2184,10 +2152,8 @@ function checkBoard(
         }
 
 
-        if (complete) {
-
+        if (win) {
             return true;
-
         }
 
     }
@@ -2195,22 +2161,14 @@ function checkBoard(
 
     /* DIAGONAL */
 
-    let diagonal =
-        true;
+    let diagonal1 = true;
 
 
-    for (
-        let i = 0;
-        i < 5;
-        i++
-    ) {
+    for (let i = 0; i < 5; i++) {
 
-        if (
-            !matrix[i][i]
-        ) {
+        if (!matrix[i][i]) {
 
-            diagonal =
-                false;
+            diagonal1 = false;
 
             break;
 
@@ -2219,31 +2177,21 @@ function checkBoard(
     }
 
 
-    if (diagonal) {
-
+    if (diagonal1) {
         return true;
-
     }
 
 
     /* REVERSE DIAGONAL */
 
-    diagonal =
-        true;
+    let diagonal2 = true;
 
 
-    for (
-        let i = 0;
-        i < 5;
-        i++
-    ) {
+    for (let i = 0; i < 5; i++) {
 
-        if (
-            !matrix[i][4-i]
-        ) {
+        if (!matrix[i][4 - i]) {
 
-            diagonal =
-                false;
+            diagonal2 = false;
 
             break;
 
@@ -2252,46 +2200,420 @@ function checkBoard(
     }
 
 
-    return diagonal;
+    if (diagonal2) {
+        return true;
+    }
+
+
+    return false;
 
 }
 
 
+/* ============================================================
+   CELEBRATION
+   ============================================================ */
 
-/* =====================================================
+function startCelebration() {
+
+    const container =
+        document.getElementById(
+            'celebration'
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    container.innerHTML = '';
+
+
+    const colors = [
+        '#D4AF37',
+        '#006C35',
+        '#FFFFFF',
+        '#b89525'
+    ];
+
+
+    for (let i = 0; i < 120; i++) {
+
+        const piece =
+            document.createElement('div');
+
+
+        piece.className =
+            'confetti';
+
+
+        piece.style.left =
+            Math.random() * 100 + '%';
+
+
+        piece.style.animationDelay =
+            Math.random() * 1.5 + 's';
+
+
+        piece.style.animationDuration =
+            (2.5 + Math.random() * 2) + 's';
+
+
+        piece.style.width =
+            (6 + Math.random() * 7) + 'px';
+
+
+        piece.style.height =
+            (8 + Math.random() * 12) + 'px';
+
+
+        piece.style.backgroundColor =
+            colors[
+                Math.floor(
+                    Math.random() * colors.length
+                )
+            ];
+
+
+        piece.style.borderRadius =
+            Math.random() > 0.5
+            ?
+            '2px'
+            :
+            '50%';
+
+
+        container.appendChild(piece);
+
+    }
+
+}
+
+
+/* ============================================================
+   WIN MODAL
+   ============================================================ */
+
+function showWinModal(teamName) {
+
+    document.getElementById(
+        'win-title'
+    ).innerText =
+        `🎉 مبروك الفوز لـ ${teamName}!`;
+
+
+    document.getElementById(
+        'win-message'
+    ).innerText =
+        'استطاع الفريق إكمال خط مستقيم بنجاح ودام عزك يا وطن! 🎉';
+
+
+    document.getElementById(
+        'win-modal'
+    ).classList.remove(
+        'hidden'
+    );
+
+
+    startCelebration();
+
+}
+
+
+/* ============================================================
+   CLOSE WIN MODAL
+   ============================================================ */
+
+function closeWinModal() {
+
+    document.getElementById(
+        'win-modal'
+    ).classList.add(
+        'hidden'
+    );
+
+
+    const celebration =
+        document.getElementById(
+            'celebration'
+        );
+
+
+    if (celebration) {
+
+        celebration.innerHTML = '';
+
+    }
+
+}
+
+
+/* ============================================================
+   RESET GAME
+   ============================================================ */
+
+function resetGame() {
+
+    /* ========================================================
+       RESET STATE
+       ======================================================== */
+
+    gameState.drawnElements = [];
+
+    gameState.drawnQuestions = [];
+
+    gameState.currentElement = null;
+
+    gameState.currentQuestion = null;
+
+
+    gameState.team1Checked = {
+        free: true
+    };
+
+
+    gameState.team2Checked = {
+        free: true
+    };
+
+
+    gameState.hasTeam1Won = false;
+
+    gameState.hasTeam2Won = false;
+
+
+    /* ========================================================
+       RESET TEAM NAMES
+       ======================================================== */
+
+    gameState.team1Name =
+        'فريق الأخضر';
+
+    gameState.team2Name =
+        'فريق المجد';
+
+
+    document.getElementById(
+        'team1-name-input'
+    ).value =
+        'فريق الأخضر';
+
+
+    document.getElementById(
+        'team2-name-input'
+    ).value =
+        'فريق المجد';
+
+
+    /* ========================================================
+       RESET QUESTION
+       ======================================================== */
+
+    const questionText =
+        document.getElementById(
+            'question-text'
+        );
+
+
+    questionText.innerText =
+        'اضغط على "سحب سؤال" لبدء المسابقة...';
+
+
+    questionText.classList.remove(
+        'text-white'
+    );
+
+
+    questionText.classList.add(
+        'text-gray-300'
+    );
+
+
+    /* ========================================================
+       RESET ANSWER
+       ======================================================== */
+
+    document.getElementById(
+        'answer-text'
+    ).innerText =
+        '...';
+
+
+    const answerBox =
+        document.getElementById(
+            'answer-box'
+        );
+
+
+    answerBox.classList.add(
+        'blur-sm',
+        'opacity-50'
+    );
+
+
+    const revealButton =
+        document.getElementById(
+            'btn-reveal'
+        );
+
+
+    revealButton.disabled = true;
+
+    revealButton.style.display =
+        'flex';
+
+    revealButton.style.opacity =
+        '1';
+
+
+    /* ========================================================
+       RESET ELEMENT
+       ======================================================== */
+
+    document.getElementById(
+        'card-name'
+    ).innerText =
+        'في انتظار السحب';
+
+
+    document.getElementById(
+        'card-name'
+    ).classList.remove(
+        'text-saudi-dark'
+    );
+
+
+    document.getElementById(
+        'card-name'
+    ).classList.add(
+        'text-gray-400'
+    );
+
+
+    document.getElementById(
+        'card-icon'
+    ).className =
+        'fa-solid fa-box-open text-lg md:text-xl text-gray-400';
+
+
+    /* ========================================================
+       RESET DRAW BUTTONS
+       ======================================================== */
+
+    const elementButton =
+        document.getElementById(
+            'btn-draw-element'
+        );
+
+
+    elementButton.disabled = false;
+
+    elementButton.style.opacity =
+        '1';
+
+
+    const questionButton =
+        document.getElementById(
+            'btn-draw-question'
+        );
+
+
+    questionButton.disabled = false;
+
+    questionButton.style.opacity =
+        '1';
+
+
+    /* ========================================================
+       RESET ELEMENT HISTORY
+       ======================================================== */
+
+    document.getElementById(
+        'element-history'
+    ).innerHTML = `
+
+        <span
+            class="text-[8px]
+                   text-gray-400">
+
+            لم يتم سحب أي عنصر
+
+        </span>
+
+    `;
+
+
+    /* ========================================================
+       RESET QUESTION HISTORY
+       ======================================================== */
+
+    document.getElementById(
+        'question-history'
+    ).innerHTML = `
+
+        <span
+            class="text-[8px]
+                   text-gray-400">
+
+            لم يتم سحب أي سؤال
+
+        </span>
+
+    `;
+
+
+    /* ========================================================
+       CLOSE MODAL
+       ======================================================== */
+
+    closeWinModal();
+
+
+    /* ========================================================
+       RENDER
+       ======================================================== */
+
+    renderTeamBoards();
+
+}
+
+
+/* ============================================================
    DRAW ELEMENT
-===================================================== */
+   ============================================================ */
 
 function drawNextElement() {
 
     const available =
         RAW_BINGO_ELEMENTS.filter(
-            element =>
-
-                !gameState
-                .drawnElements
-                .some(
+            item =>
+                !gameState.drawnElements.some(
                     drawn =>
-                        drawn.id ===
-                        element.id
+                        drawn.id === item.id
                 )
         );
 
 
-    if (
-        available.length === 0
-    ) {
+    if (available.length === 0) {
 
         document.getElementById(
             'card-name'
         ).innerText =
-            'انتهت العناصر';
+            'تم سحب جميع العناصر';
 
 
-        document.getElementById(
-            'btn-draw-element'
-        ).disabled =
-            true;
+        const button =
+            document.getElementById(
+                'btn-draw-element'
+            );
+
+
+        button.disabled = true;
+
+        button.style.opacity =
+            '0.5';
+
 
         return;
 
@@ -2307,15 +2629,41 @@ function drawNextElement() {
         ];
 
 
-    gameState
-        .drawnElements
-        .push(
-            element
-        );
+    gameState.drawnElements.push(
+        element
+    );
 
 
     gameState.currentElement =
         element;
+
+
+    updateElementDisplay();
+
+    updateElementHistory();
+
+}
+
+
+/* ============================================================
+   ELEMENT DISPLAY
+   ============================================================ */
+
+function updateElementDisplay() {
+
+    const element =
+        gameState.currentElement;
+
+
+    if (!element) {
+        return;
+    }
+
+
+    const card =
+        document.getElementById(
+            'current-card-display'
+        );
 
 
     const icon =
@@ -2330,77 +2678,78 @@ function drawNextElement() {
         );
 
 
-    icon.innerHTML =
-        `<i class="fa-solid ${element.icon}"></i>`;
+    card.classList.remove(
+        'drawing-animation'
+    );
+
+
+    void card.offsetWidth;
+
+
+    card.classList.add(
+        'drawing-animation'
+    );
+
+
+    icon.className =
+        `fa-solid
+         ${element.icon}
+         text-xl
+         md:text-2xl
+         text-saudi-green`;
 
 
     name.innerText =
         element.name;
 
 
-    document
-        .getElementById(
-            'current-card-display'
-        )
-        .animate(
-            [
-                {
-                    transform:
-                        'scale(.8)',
-                    opacity:
-                        .4
-                },
-                {
-                    transform:
-                        'scale(1)',
-                    opacity:
-                        1
-                }
-            ],
-            {
-                duration:
-                    350
-            }
-        );
+    name.classList.remove(
+        'text-gray-400'
+    );
+
+
+    name.classList.add(
+        'text-saudi-dark'
+    );
 
 }
 
 
-
-/* =====================================================
+/* ============================================================
    DRAW QUESTION
-===================================================== */
+   ============================================================ */
 
 function drawNextQuestion() {
 
     const available =
         QUESTIONS_BANK.filter(
             question =>
-
-                !gameState
-                .drawnQuestions
-                .some(
+                !gameState.drawnQuestions.some(
                     drawn =>
-                        drawn.id ===
-                        question.id
+                        drawn.id === question.id
                 )
         );
 
 
-    if (
-        available.length === 0
-    ) {
+    if (available.length === 0) {
 
         document.getElementById(
             'question-text'
         ).innerText =
-            'تم سحب جميع الأسئلة!';
+            'تم سحب جميع الأسئلة الـ50!';
 
 
-        document.getElementById(
-            'btn-draw-question'
-        ).disabled =
-            true;
+        const button =
+            document.getElementById(
+                'btn-draw-question'
+            );
+
+
+        button.disabled = true;
+
+        button.style.opacity =
+            '0.5';
+
 
         return;
 
@@ -2416,129 +2765,276 @@ function drawNextQuestion() {
         ];
 
 
-    gameState
-        .drawnQuestions
-        .push(
-            question
-        );
+    gameState.drawnQuestions.push(
+        question
+    );
 
 
     gameState.currentQuestion =
         question;
 
 
-    document.getElementById(
-        'question-text'
-    ).innerText =
-        question.q;
+    updateQuestionDisplay();
+
+    updateQuestionHistory();
+
+}
 
 
-    const answer =
+/* ============================================================
+   QUESTION DISPLAY
+   ============================================================ */
+
+function updateQuestionDisplay() {
+
+    const question =
+        gameState.currentQuestion;
+
+
+    if (!question) {
+        return;
+    }
+
+
+    const questionText =
+        document.getElementById(
+            'question-text'
+        );
+
+
+    const answerText =
         document.getElementById(
             'answer-text'
         );
 
 
-    answer.innerText =
+    const answerBox =
+        document.getElementById(
+            'answer-box'
+        );
+
+
+    const revealButton =
+        document.getElementById(
+            'btn-reveal'
+        );
+
+
+    questionText.innerText =
+        question.q;
+
+
+    questionText.classList.remove(
+        'text-gray-300'
+    );
+
+
+    questionText.classList.add(
+        'text-white'
+    );
+
+
+    answerText.innerText =
         question.a;
 
 
-    answer.style.display =
-        'none';
+    /* إخفاء الإجابة */
+
+    answerBox.classList.add(
+        'blur-sm',
+        'opacity-50'
+    );
 
 
-    document.getElementById(
-        'btn-reveal'
-    ).disabled =
+    revealButton.style.display =
+        'flex';
+
+
+    revealButton.style.opacity =
+        '1';
+
+
+    revealButton.disabled =
         false;
 
 }
 
 
-
-/* =====================================================
+/* ============================================================
    REVEAL ANSWER
-===================================================== */
+   ============================================================ */
 
 function revealAnswer() {
 
+    const answerBox =
+        document.getElementById(
+            'answer-box'
+        );
+
+
+    const button =
+        document.getElementById(
+            'btn-reveal'
+        );
+
+
+    answerBox.classList.remove(
+        'blur-sm',
+        'opacity-50'
+    );
+
+
+    button.style.opacity =
+        '0';
+
+
+    button.disabled =
+        true;
+
+
+    setTimeout(() => {
+
+        button.style.display =
+            'none';
+
+    }, 300);
+
+}
+
+
+/* ============================================================
+   ELEMENT HISTORY
+   ============================================================ */
+
+function updateElementHistory() {
+
+    const container =
+        document.getElementById(
+            'element-history'
+        );
+
+
     if (
-        !gameState.currentQuestion
+        gameState.drawnElements.length === 1
     ) {
 
-        return;
+        container.innerHTML = '';
 
     }
 
 
-    const answer =
+    const current =
+        gameState.drawnElements[
+            gameState.drawnElements.length - 1
+        ];
+
+
+    const item =
+        document.createElement('span');
+
+
+    item.className =
+        `bg-saudi-green/30
+         text-white
+         px-2 py-0.5
+         rounded-xl
+         text-[8px]
+         font-bold
+         border
+         border-saudi-green/50`;
+
+
+    item.innerHTML = `
+
+        <i class="fa-solid
+                  ${current.icon}
+                  text-saudi-gold
+                  ml-1">
+        </i>
+
+        ${current.name}
+
+    `;
+
+
+    container.insertBefore(
+        item,
+        container.firstChild
+    );
+
+}
+
+
+/* ============================================================
+   QUESTION HISTORY
+   ============================================================ */
+
+function updateQuestionHistory() {
+
+    const container =
         document.getElementById(
-            'answer-text'
+            'question-history'
         );
 
 
-    answer.style.display =
-        'block';
+    if (
+        gameState.drawnQuestions.length === 1
+    ) {
+
+        container.innerHTML = '';
+
+    }
 
 
-    document.getElementById(
-        'btn-reveal'
-    ).disabled =
-        true;
-
-}
+    const current =
+        gameState.drawnQuestions[
+            gameState.drawnQuestions.length - 1
+        ];
 
 
-
-/* =====================================================
-   WIN MODAL
-===================================================== */
-
-function showWin(
-    teamName
-) {
-
-    document.getElementById(
-        'win-title'
-    ).innerText =
-        `مبروك لـ ${teamName}!`;
+    const item =
+        document.createElement('span');
 
 
-    document.getElementById(
-        'win-message'
-    ).innerText =
-        'أكمل الفريق خط بنقو بنجاح 🎉';
+    item.className =
+        `bg-saudi-gold/20
+         text-white
+         px-2 py-0.5
+         rounded-xl
+         text-[8px]
+         font-bold
+         border
+         border-saudi-gold/40`;
 
 
-    document.getElementById(
-        'win-modal'
-    ).classList.add(
-        'show'
+    item.innerHTML = `
+
+        <i class="fa-solid
+                  fa-circle-question
+                  text-saudi-gold
+                  ml-1">
+        </i>
+
+        سؤال ${current.id}
+
+    `;
+
+
+    container.insertBefore(
+        item,
+        container.firstChild
     );
 
 }
 
 
-
-function closeWinModal() {
-
-    document.getElementById(
-        'win-modal'
-    ).classList.remove(
-        'show'
-    );
-
-}
-
-
-
-/* =====================================================
+/* ============================================================
    START
-===================================================== */
+   ============================================================ */
 
 window.addEventListener(
     'DOMContentLoaded',
-    () => {
+    function () {
 
         renderTeamBoards();
 
@@ -2547,7 +3043,5 @@ window.addEventListener(
 
 </script>
 
-
 </body>
-
 </html>
